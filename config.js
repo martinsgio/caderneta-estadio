@@ -1,9 +1,3 @@
-// Configuração do Supabase.
-// Copie os dois valores em Supabase → Project Settings → API (ou "Data API" / "API Keys").
-// A chave "anon public" (ou "publishable") pode ficar pública: quem protege os dados
-// são as regras de segurança (RLS) criadas pelo arquivo supabase.sql.
-// NUNCA coloque aqui a chave "service_role" / "secret".
-window.CADERNETA_CONFIG = {
-  SUPABASE_URL: 'COLE_AQUI_A_PROJECT_URL',          // ex.: https://abcdefghijkl.supabase.co
-  SUPABASE_ANON_KEY: 'COLE_AQUI_A_CHAVE_ANON_PUBLIC' // ex.: eyJhbGciOi... ou sb_publishable_...
-};
+var C = window.CADERNETA_CONFIG = new Object();
+C.SUPABASE_URL = 'https://zzvmvarsabxwiohmogxz.supabase.co';
+C.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp6dm12YXJzYWJ4d2lvaG1vZ3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIwMDg2NDksImV4cCI6MjEwNzU4NDY0OX0.zmO5Fbb0xKBLu7b13dq7DCEfcHZ-Hn2gX5vSYzaI8wY';
