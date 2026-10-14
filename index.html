@@ -2,10 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#06080D">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="robots" content="noindex">
 <title>Caderneta de Estádio</title>
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -39,11 +38,13 @@
   --dock:64px;
   --ease:cubic-bezier(.65,0,.25,1);
   --slide:.42s;
-  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --sab:env(safe-area-inset-bottom,0px);
 }
+@media (display-mode: standalone){:root{--sab:max(env(safe-area-inset-bottom,0px),18px)}}
 *{box-sizing:border-box}
-html,body{background:var(--bg)}
-body{margin:0;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html,body{background:var(--bg);height:100%}
+body{margin:0;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow:hidden}
+.scroller{position:fixed;inset:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
 img{max-width:100%}
 [hidden]{display:none!important}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -52,7 +53,7 @@ button{cursor:pointer}
 h1,h2,h3{margin:0;text-wrap:balance}
 .label{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .wrap{max-width:620px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-main{padding-block:14px calc(var(--dock) + 40px + env(safe-area-inset-bottom,0px))}
+main{padding-block:calc(14px + env(safe-area-inset-top,0px)) calc(var(--dock) + 44px + var(--sab))}
 .view{display:grid;gap:20px;grid-template-columns:minmax(0,1fr)}
 .view>*{min-width:0}
 .view.in-r{animation:inR .36s var(--ease)}
@@ -259,7 +260,7 @@ button.fact{width:100%}
 .loading{padding:60px 0;text-align:center;color:var(--muted);font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
 
 /* login */
-.auth{min-height:100vh;min-height:100dvh;display:grid;align-content:center;padding-block:24px 32px}
+.auth{display:grid;align-content:center;padding-block:24px 32px}
 .auth-in{display:grid;gap:18px;max-width:440px;width:100%;margin:0 auto}
 .auth-ticket{border-radius:28px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
 .auth-cover{background:var(--pitch-lines) center/cover no-repeat,var(--grad);background-size:cover;padding:20px 20px 24px;display:grid;gap:22px;color:#fff}
@@ -280,7 +281,7 @@ button.fact{width:100%}
 
 /* barra flutuante com destaque deslizante */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:30;pointer-events:none;
-  padding:0 max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+  padding:0 max(16px,env(safe-area-inset-right,0px)) calc(12px + var(--sab)) max(16px,env(safe-area-inset-left,0px))}
 .dock-in{pointer-events:auto;position:relative;max-width:400px;margin:0 auto;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(18,22,32,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);box-shadow:0 18px 40px -16px rgba(0,0,0,.9)}
 .dk-ind{position:absolute;top:6px;left:0;height:52px;width:52px;border-radius:999px;background:var(--grad);box-shadow:0 8px 22px -8px rgba(47,123,255,.8);z-index:0;transform:translateX(6px);will-change:transform}
 .dock-in.ready .dk-ind{transition:transform var(--slide) var(--ease),width var(--slide) var(--ease)}
@@ -351,7 +352,7 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
 .cfg-block h3{font-family:var(--f-display);font-weight:900;font-size:24px;text-transform:uppercase}
 .export-out{width:100%;min-height:120px;font-family:var(--f-mono);font-size:11.5px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px;color:var(--ink)}
 
-.toast{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:calc(var(--dock) + 30px + env(safe-area-inset-bottom,0px));z-index:60;
+.toast{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:calc(var(--dock) + 30px + var(--sab));z-index:60;
   background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:.2s;max-width:calc(100% - 32px);text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -368,7 +369,7 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
 </svg>
 
 <!-- ============ LOGIN ============ -->
-<section class="auth wrap" id="auth" hidden>
+<section class="auth wrap scroller" id="auth" hidden>
   <div class="auth-in">
     <div class="auth-ticket">
       <div class="auth-cover">
@@ -403,7 +404,7 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
 
 <!-- ============ APP ============ -->
 <div id="app" hidden>
-<main>
+<main class="scroller" id="main">
   <div class="wrap">
     <section class="view" id="v-jogos" aria-label="Ingressos"><div class="loading">Abrindo sua caderneta…</div></section>
     <section class="view" id="v-estadios" aria-label="Estádios" hidden></section>
@@ -1117,7 +1118,7 @@ function setTab(t){
   if (from !== to && from > -1){ const el = $('#v-' + t); void el.offsetWidth; el.classList.add(to > from ? 'in-r' : 'in-l'); }
   $$('.dk[data-tab]').forEach(b => b.setAttribute('aria-current', b.dataset.tab === t ? 'page' : 'false'));
   placeIndicator();
-  window.scrollTo({ top: 0 });
+  $('#main').scrollTo({ top: 0 });
 }
 window.addEventListener('resize', placeIndicator);
 document.addEventListener('animationend', e => { if (e.target.classList?.contains('view')) e.target.classList.remove('in-r', 'in-l'); });
