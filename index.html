@@ -205,7 +205,7 @@ main{padding-block:calc(16px + var(--sat)) calc(var(--dock) + 44px + var(--sab))
 .fact p{margin:0;font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
 button.fact{width:100%}
 
-.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(102px,1fr));gap:10px}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
 .badge{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 10px 11px;display:grid;justify-items:center;gap:6px;text-align:center;align-content:start;min-width:0}
 .badge svg{width:40px;height:46px}
 .badge h3{font-size:12.5px;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
@@ -215,7 +215,6 @@ button.fact{width:100%}
 .badge .pt{font-family:var(--f-mono);font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
 .badge.locked svg{opacity:.28;filter:grayscale(1)}
 .badge.locked h3{color:var(--muted)}
-.badge.got{background:linear-gradient(var(--surface),var(--surface)) padding-box,var(--grad) border-box;border:1.5px solid transparent}
 .bsum{display:flex;align-items:baseline;gap:10px}
 .bsum b{font-family:var(--f-display);font-weight:900;font-size:46px;line-height:.9}
 .more{justify-self:center}
@@ -361,6 +360,54 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
   background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:.2s;max-width:calc(100% - 32px);text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* pênaltis */
+.score-wrap{display:grid;justify-items:center;gap:6px}
+.pens{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;font-weight:600;color:#fff;background:rgba(5,10,30,.38);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.res.vp{background:rgba(52,211,153,.16);color:var(--win)}.res.dp{background:rgba(248,113,113,.16);color:var(--loss)}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;font-weight:600;cursor:pointer}
+.toggle input{-webkit-appearance:none;appearance:none;width:48px;height:28px;border-radius:999px;background:var(--surface-3);position:relative;flex:none;transition:background .2s;cursor:pointer;margin:0}
+.toggle input::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s var(--ease)}
+.toggle input:checked{background:var(--accent)}
+.toggle input:checked::after{transform:translateX(20px)}
+.pen-row{display:grid;grid-template-columns:minmax(0,1fr) 76px;gap:10px;align-items:center}
+.pen-row span{font-size:15px;font-weight:600;overflow-wrap:anywhere}
+.pen-row input{font-family:var(--f-display);font-weight:900;font-size:30px;text-align:center;padding:2px;background:var(--surface-2);border:1px solid transparent;border-radius:14px;width:100%;outline:none;color:var(--ink)}
+.pen-row input:focus{border-color:var(--accent-2)}
+/* filtros e ordem */
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tool{border:0;background:var(--surface-2);color:var(--ink);border-radius:999px;padding:10px 15px;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px}
+.tool svg{width:16px;height:16px;flex:none}
+.tool .n{background:var(--grad);color:#fff;border-radius:999px;font-size:11px;line-height:1;padding:4px 7px;font-weight:700}
+.fchip{border:1px solid rgba(61,139,255,.45);background:var(--grad-soft);color:var(--ink);border-radius:999px;padding:7px 12px;font-size:13px;font-weight:600;display:inline-flex;gap:6px;align-items:center;max-width:100%}
+.fchip b{font-weight:500;color:var(--muted)}
+.fchip span{color:var(--muted);font-size:11px}
+.field select{width:100%;background-color:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 38px 12px 14px;outline:none;min-width:0;-webkit-appearance:none;appearance:none;font-size:16px;color:var(--ink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238C96A9' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:16px}
+.field select:focus{border-color:var(--accent)}
+.seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px}
+.seg.two{grid-template-columns:1fr 1fr}
+.seg button{border:0;background:transparent;color:var(--muted);border-radius:12px;padding:10px 4px;font-weight:600;font-size:13.5px;transition:background .2s,color .2s}
+.seg button[aria-pressed="true"]{background:var(--grad);color:#fff}
+/* sugestões */
+.field,.sb-row{position:relative}
+.sugg{position:absolute;z-index:6;left:0;right:0;background:var(--surface-2);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 40px -14px rgba(0,0,0,.9);max-height:264px;overflow-y:auto;overscroll-behavior:contain}
+.sugg button{display:flex;width:100%;align-items:center;gap:10px;border:0;background:none;text-align:left;padding:12px 14px;font-size:15px;color:var(--ink);border-top:1px solid var(--line);min-width:0}
+.sugg button:first-child{border-top:0}
+.sugg button span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sugg button small{margin-left:auto;color:var(--muted);font-size:12px;flex:none}
+.sugg button:active{background:var(--surface-3)}
+/* conquistas por nível */
+.badge .lvl{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+.badge[data-t="1"] .lvl{background:linear-gradient(135deg,#8A5A2B,#E0A96D);color:#2A1606}
+.badge[data-t="2"] .lvl{background:linear-gradient(135deg,#8E9AAB,#F1F5F9);color:#1A2230}
+.badge[data-t="3"] .lvl{background:linear-gradient(135deg,#D79A12,#FDE68A);color:#2A1A02}
+.badge[data-t="4"] .lvl{background:linear-gradient(135deg,#38BDF8,#E0F7FF 50%,#A78BFA);color:#0B1530}
+.badge[data-t="1"]{border-color:#9A6A3C}
+.badge[data-t="2"]{border-color:#AAB4C3}
+.badge[data-t="3"]{border-color:#E1B12C}
+.badge[data-t="4"]{background:linear-gradient(var(--surface),var(--surface)) padding-box,linear-gradient(135deg,#38BDF8,#E0F7FF,#A78BFA) border-box;border:1.5px solid transparent}
+.pips{display:flex;gap:4px}
+.pips i{width:7px;height:7px;border-radius:50%;background:var(--surface-3)}
+.pips i.on{background:var(--accent-2)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -369,6 +416,9 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="g-blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1C33F5"/><stop offset=".55" stop-color="#2F7BFF"/><stop offset="1" stop-color="#22D3EE"/></linearGradient>
+    <linearGradient id="g-bronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8A5A2B"/><stop offset="1" stop-color="#E0A96D"/></linearGradient>
+    <linearGradient id="g-silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8E9AAB"/><stop offset="1" stop-color="#F1F5F9"/></linearGradient>
+    <linearGradient id="g-diamond" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38BDF8"/><stop offset=".5" stop-color="#E0F7FF"/><stop offset="1" stop-color="#A78BFA"/></linearGradient>
     <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F59E0B"/><stop offset="1" stop-color="#FDE68A"/></linearGradient>
   </defs>
 </svg>
@@ -443,14 +493,21 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
     </div>
     <div class="scorebox">
       <span class="label">Placar final</span>
-      <div class="sb-row"><input id="f-home" list="dl-clubes" placeholder="Mandante" autocomplete="off" aria-label="Time mandante"><input id="f-hg" class="g" type="number" inputmode="numeric" min="0" max="99" placeholder="0" aria-label="Gols do mandante"></div>
-      <div class="sb-row"><input id="f-away" list="dl-clubes" placeholder="Visitante" autocomplete="off" aria-label="Time visitante"><input id="f-ag" class="g" type="number" inputmode="numeric" min="0" max="99" placeholder="0" aria-label="Gols do visitante"></div>
+      <div class="sb-row"><input id="f-home" data-suggest="clubs" placeholder="Mandante" autocomplete="off" aria-label="Time mandante"><input id="f-hg" class="g" type="number" inputmode="numeric" min="0" max="99" placeholder="0" aria-label="Gols do mandante"></div>
+      <div class="sb-row"><input id="f-away" data-suggest="clubs" placeholder="Visitante" autocomplete="off" aria-label="Time visitante"><input id="f-ag" class="g" type="number" inputmode="numeric" min="0" max="99" placeholder="0" aria-label="Gols do visitante"></div>
+    </div>
+    <label class="toggle"><span>Foi para os pênaltis</span><input id="f-pen" type="checkbox" role="switch" aria-controls="f-pen-box"></label>
+    <div class="scorebox" id="f-pen-box" hidden>
+      <span class="label">Disputa de pênaltis</span>
+      <div class="pen-row"><span id="f-pen-hn">Mandante</span><input id="f-ph" type="number" inputmode="numeric" min="0" max="30" placeholder="0" aria-label="Pênaltis convertidos pelo mandante"></div>
+      <div class="pen-row"><span id="f-pen-an">Visitante</span><input id="f-pa" type="number" inputmode="numeric" min="0" max="30" placeholder="0" aria-label="Pênaltis convertidos pelo visitante"></div>
+      <p class="hint">Quem vence a disputa se classifica. No retrospecto do seu time, passar nos pênaltis conta como vitória e cair nos pênaltis conta como derrota.</p>
     </div>
     <div class="grid2">
       <label class="field"><span>Data</span><input id="f-date" type="date"></label>
-      <label class="field"><span>Competição</span><input id="f-comp" list="dl-comps" placeholder="Brasileirão" autocomplete="off"></label>
+      <label class="field"><span>Competição</span><input id="f-comp" data-suggest="comps" placeholder="Brasileirão" autocomplete="off"></label>
     </div>
-    <label class="field"><span>Estádio</span><input id="f-stadium" list="dl-estadios" placeholder="Ex.: Estádio 1º de Maio" autocomplete="off"></label>
+    <label class="field"><span>Estádio</span><input id="f-stadium" data-suggest="stadiums" placeholder="Ex.: Estádio 1º de Maio" autocomplete="off"></label>
     <div class="grid2">
       <label class="field"><span>Cidade</span><input id="f-city" placeholder="São Bernardo do Campo" autocomplete="off"></label>
       <label class="field"><span>País</span><input id="f-country" placeholder="Brasil" autocomplete="off"></label>
@@ -489,7 +546,7 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
       </div>
     </div>
     <label class="field"><span>Seu nome ou apelido</span><input id="p-name" placeholder="Giovani" autocomplete="off"></label>
-    <label class="field"><span>Time do coração</span><input id="p-team" list="dl-clubes" placeholder="Ex.: Corinthians" autocomplete="off"></label>
+    <label class="field"><span>Time do coração</span><input id="p-team" data-suggest="clubs" placeholder="Ex.: Corinthians" autocomplete="off"></label>
     <p class="hint">Com o time definido, o perfil mostra seu retrospecto no estádio e se você é pé-quente.</p>
     <div class="btn-row"><button class="btn primary" type="submit" id="p-save" style="flex:1">Salvar perfil</button><button class="btn ghost" type="button" data-close>Cancelar</button></div>
   </form>
@@ -500,6 +557,21 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
   <div class="grip" tabindex="-1" autofocus></div>
   <div class="sh-head"><h2 id="lg-title">Escudos</h2><button class="round" data-close aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="sh-body" id="lg-body"></div>
+</dialog>
+
+<!-- filtros -->
+<dialog class="sheet" id="sh-filter" aria-labelledby="flt-title">
+  <div class="grip" tabindex="-1" autofocus></div>
+  <div class="sh-head"><h2 id="flt-title">Filtrar</h2><button class="round" data-close aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <form class="sh-body" id="flt-form" novalidate>
+    <label class="field"><span>Ano</span><select id="fl-year"></select></label>
+    <label class="field"><span>Time</span><select id="fl-team"></select></label>
+    <label class="field"><span>Estádio</span><select id="fl-stadium"></select></label>
+    <label class="field"><span>Competição</span><select id="fl-comp"></select></label>
+    <div class="field" id="fl-res-box"><span>Resultado do seu time</span><div class="seg" id="fl-res"><button type="button" data-v="">Todos</button><button type="button" data-v="v">Vitórias</button><button type="button" data-v="e">Empates</button><button type="button" data-v="d">Derrotas</button></div></div>
+    <div class="field"><span>Ordem dos ingressos</span><div class="seg two" id="fl-sort"><button type="button" data-v="desc">Mais recentes</button><button type="button" data-v="asc">Mais antigos</button></div></div>
+    <div class="btn-row"><button class="btn primary" type="submit" style="flex:1">Mostrar ingressos</button><button class="btn ghost" type="button" id="fl-clear">Limpar filtros</button></div>
+  </form>
 </dialog>
 
 <!-- dados e conta -->
@@ -532,9 +604,6 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
 </dialog>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<datalist id="dl-clubes"></datalist>
-<datalist id="dl-estadios"></datalist>
-<datalist id="dl-comps"></datalist>
 
 <script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.114.0/dist/umd/supabase.js"></script>
@@ -554,31 +623,154 @@ const fmtN = n => Number(n).toLocaleString('pt-BR');
 const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); }));
 
 /* ---------- referências ---------- */
-const CLUBES = ['Corinthians','Palmeiras','São Paulo','Santos','Red Bull Bragantino','Mirassol','Ponte Preta','Guarani','Novorizontino','Ituano','Portuguesa','Juventus-SP','São Bernardo FC','Santo André','São Caetano','Água Santa','Flamengo','Fluminense','Vasco da Gama','Botafogo','Atlético-MG','Cruzeiro','Grêmio','Internacional','Juventude','Athletico-PR','Coritiba','Bahia','Vitória','Fortaleza','Ceará','Sport','Náutico','Remo','Paysandu','Goiás','Atlético-GO','Cuiabá','Brasil'];
+const CLUBES = ['Corinthians','Palmeiras','São Paulo','Santos','Red Bull Bragantino','Mirassol','Ponte Preta','Guarani','Novorizontino','Ituano','Portuguesa','Juventus-SP','São Bernardo FC','Santo André','São Caetano','Água Santa','Flamengo','Fluminense','Vasco da Gama','Botafogo','Atlético-MG','Cruzeiro','Grêmio','Internacional','Juventude','Athletico-PR','Coritiba','Bahia','Vitória','Fortaleza','Ceará','Sport','Náutico','Remo','Paysandu','Goiás','Atlético-GO','Cuiabá','Brasil','Botafogo-SP','Ferroviária','América-MG','Operário-PR','Chapecoense','Avaí','Figueirense','Criciúma','Santa Cruz','CRB','CSA','Vila Nova','Amazonas','Boca Juniors','River Plate','Racing','Independiente','San Lorenzo','Vélez Sarsfield','Estudiantes','Talleres','Lanús','Argentinos Juniors','Rosario Central',"Newell's Old Boys",'Huracán','Defensa y Justicia','Godoy Cruz','Belgrano','Gimnasia La Plata','Banfield','Peñarol','Nacional','Liverpool Montevideo','Defensor Sporting','Danubio','Colo-Colo','Universidad de Chile','Universidad Católica','Palestino','Huachipato','Cobresal','Coquimbo Unido','Atlético Nacional','Millonarios','América de Cali','Junior Barranquilla','Deportes Tolima','Once Caldas','Independiente Medellín','Santa Fe','Olimpia','Cerro Porteño','Libertad','LDU Quito','Barcelona SC','Independiente del Valle','Emelec','Aucas','Alianza Lima','Universitario','Sporting Cristal','Melgar','Bolívar','The Strongest','Always Ready','Caracas','Deportivo Táchira','Real Madrid','Barcelona','Atlético de Madrid','Manchester City','Manchester United','Liverpool','Chelsea','Arsenal','Tottenham','Bayern de Munique','Borussia Dortmund','PSG','Juventus','Milan','Inter de Milão','Benfica','Porto','Sporting','Argentina','Uruguai'];
 const ESTADIOS = [
   ['Neo Química Arena','São Paulo'],['Morumbis','São Paulo'],['Allianz Parque','São Paulo'],['Pacaembu','São Paulo'],['Canindé','São Paulo'],['Rua Javari','São Paulo'],
   ['Estádio 1º de Maio','São Bernardo do Campo'],['Bruno José Daniel','Santo André'],['Anacleto Campanella','São Caetano do Sul'],['Distrital do Inamar','Diadema'],
   ['Vila Belmiro','Santos'],['Nabi Abi Chedid','Bragança Paulista'],['Moisés Lucarelli','Campinas'],['Brinco de Ouro','Campinas'],['Jorge Ismael de Biasi','Novo Horizonte'],['José Maria de Campos Maia','Mirassol'],
   ['Maracanã','Rio de Janeiro'],['Nilton Santos','Rio de Janeiro'],['São Januário','Rio de Janeiro'],['Mineirão','Belo Horizonte'],['Arena MRV','Belo Horizonte'],
   ['Arena do Grêmio','Porto Alegre'],['Beira-Rio','Porto Alegre'],['Arena da Baixada','Curitiba'],['Couto Pereira','Curitiba'],['Arena Fonte Nova','Salvador'],['Barradão','Salvador'],
-  ['Castelão','Fortaleza'],['Ilha do Retiro','Recife'],['Mangueirão','Belém'],['Mané Garrincha','Brasília'],['Serra Dourada','Goiânia']
+  ['Castelão','Fortaleza'],['Ilha do Retiro','Recife'],['Mangueirão','Belém'],['Mané Garrincha','Brasília'],['Serra Dourada','Goiânia'],
+  ['Arena Pantanal','Cuiabá'],['Arena Condá','Chapecó'],['Ressacada','Florianópolis'],['Orlando Scarpelli','Florianópolis'],['Heriberto Hülse','Criciúma'],['Independência','Belo Horizonte'],
+  ['Arena Pernambuco','São Lourenço da Mata'],['Arruda','Recife'],['Arena da Amazônia','Manaus'],['Rei Pelé','Maceió'],['Santa Cruz (Ribeirão Preto)','Ribeirão Preto'],['Fonte Luminosa','Araraquara'],
+  ['La Bombonera','Buenos Aires','Argentina'],['Monumental de Núñez','Buenos Aires','Argentina'],['Cilindro de Avellaneda','Avellaneda','Argentina'],['Libertadores de América','Avellaneda','Argentina'],
+  ['Nuevo Gasómetro','Buenos Aires','Argentina'],['José Amalfitani','Buenos Aires','Argentina'],['Estadio UNO Jorge Luis Hirschi','La Plata','Argentina'],['Mario Alberto Kempes','Córdoba','Argentina'],
+  ['Estadio Centenario','Montevidéu','Uruguai'],['Gran Parque Central','Montevidéu','Uruguai'],['Campeón del Siglo','Montevidéu','Uruguai'],
+  ['Monumental David Arellano','Santiago','Chile'],['Estadio Nacional de Chile','Santiago','Chile'],['Atanasio Girardot','Medellín','Colômbia'],['El Campín','Bogotá','Colômbia'],
+  ['Defensores del Chaco','Assunção','Paraguai'],['La Nueva Olla','Assunção','Paraguai'],['Rodrigo Paz Delgado','Quito','Equador'],['Monumental Banco Pichincha','Guayaquil','Equador'],
+  ['Alejandro Villanueva','Lima','Peru'],['Monumental de Lima','Lima','Peru'],['Hernando Siles','La Paz','Bolívia']
 ];
 const COMPS = ['Brasileirão Série A','Brasileirão Série B','Brasileirão Série C','Brasileirão Série D','Copa do Brasil','Paulistão','Paulistão A2','Copa Libertadores','Copa Sul-Americana','Eliminatórias','Amistoso','Copinha','Brasileirão Feminino'];
 // [apelidos normalizados, sigla, cor 1, cor 2, termo de busca do escudo, país esperado]
 const CLUB_INFO = [
-  [['corinthians'],'COR','#111111','#FFFFFF','Corinthians','Brazil'],[['palmeiras'],'PAL','#006437','#FFFFFF','Palmeiras','Brazil'],[['sao paulo','spfc'],'SAO','#E30613','#FFFFFF','Sao Paulo','Brazil'],[['santos'],'SAN','#FFFFFF','#111111','Santos','Brazil'],
-  [['red bull bragantino','bragantino','rb bragantino'],'RBB','#E30613','#FFFFFF','Bragantino','Brazil'],[['mirassol'],'MIR','#F7D417','#0B7A3B','Mirassol','Brazil'],[['ponte preta'],'PON','#111111','#FFFFFF','Ponte Preta','Brazil'],
-  [['guarani'],'GUA','#0B7A3B','#FFFFFF','Guarani','Brazil'],[['novorizontino','gremio novorizontino'],'NOV','#F7D417','#111111','Novorizontino','Brazil'],[['ituano'],'ITU','#E30613','#111111','Ituano','Brazil'],
-  [['portuguesa'],'POR','#E30613','#0B7A3B','Portuguesa','Brazil'],[['juventus sp','juventus da mooca'],'JTS','#8B1E3F','#FFFFFF','Juventus SP','Brazil'],[['sao bernardo'],'SBC','#F7D417','#111111','Sao Bernardo','Brazil'],
-  [['santo andre'],'STA','#1F4FA8','#FFFFFF','Santo Andre','Brazil'],[['sao caetano'],'SCA','#1F4FA8','#FFFFFF','Sao Caetano','Brazil'],[['agua santa'],'AGS','#1F4FA8','#E30613','Agua Santa','Brazil'],
-  [['flamengo'],'FLA','#C8102E','#111111','Flamengo','Brazil'],[['fluminense'],'FLU','#7A1E3A','#0B6E3B','Fluminense','Brazil'],
-  [['vasco'],'VAS','#111111','#FFFFFF','Vasco da Gama','Brazil'],[['botafogo'],'BOT','#111111','#FFFFFF','Botafogo','Brazil'],[['atletico mg','atletico mineiro','galo'],'CAM','#111111','#FFFFFF','Atletico Mineiro','Brazil'],
-  [['cruzeiro'],'CRU','#1E3A8A','#FFFFFF','Cruzeiro','Brazil'],[['gremio'],'GRE','#1B8FD1','#111111','Gremio','Brazil'],[['internacional'],'INT','#C8102E','#FFFFFF','Internacional','Brazil'],[['juventude'],'JUV','#0B7A3B','#FFFFFF','Juventude','Brazil'],
-  [['athletico','athletico pr','atletico pr','atletico paranaense'],'CAP','#C8102E','#111111','Athletico Paranaense','Brazil'],[['coritiba'],'CFC','#0B6E3B','#FFFFFF','Coritiba','Brazil'],[['bahia'],'BAH','#1F4FA8','#C8102E','Bahia','Brazil'],
-  [['vitoria'],'VIT','#C8102E','#111111','Vitoria','Brazil'],[['fortaleza'],'FOR','#1F4FA8','#C8102E','Fortaleza','Brazil'],[['ceara'],'CEA','#111111','#FFFFFF','Ceara','Brazil'],[['sport'],'SPT','#C8102E','#111111','Sport Recife','Brazil'],
-  [['nautico'],'NAU','#C8102E','#FFFFFF','Nautico','Brazil'],[['remo'],'REM','#1E3A8A','#FFFFFF','Remo','Brazil'],[['paysandu'],'PAY','#1B8FD1','#FFFFFF','Paysandu','Brazil'],[['goias'],'GOI','#0B7A3B','#FFFFFF','Goias','Brazil'],
-  [['atletico go','atletico goianiense'],'ACG','#C8102E','#111111','Atletico Goianiense','Brazil'],[['cuiaba'],'CUI','#0B7A3B','#F7D417','Cuiaba','Brazil'],[['brasil','selecao brasileira','selecao'],'BRA','#F7D417','#0B7A3B','Brazil',''],
-  [['boca juniors','boca'],'BOC','#1E3A8A','#F7D417','Boca Juniors','Argentina'],[['river plate','river'],'RIV','#FFFFFF','#E30613','River Plate','Argentina']
+  [["corinthians"],"COR","#111111","#FFFFFF","Corinthians","Brazil"],
+  [["palmeiras"],"PAL","#006437","#FFFFFF","Palmeiras","Brazil"],
+  [["sao paulo", "spfc"],"SAO","#E30613","#FFFFFF","Sao Paulo","Brazil"],
+  [["santos"],"SAN","#FFFFFF","#111111","Santos","Brazil"],
+  [["red bull bragantino", "bragantino", "rb bragantino"],"RBB","#E30613","#FFFFFF","Bragantino","Brazil"],
+  [["mirassol"],"MIR","#F7D417","#0B7A3B","Mirassol","Brazil"],
+  [["ponte preta"],"PON","#111111","#FFFFFF","Ponte Preta","Brazil"],
+  [["guarani"],"GUA","#0B7A3B","#FFFFFF","Guarani","Brazil"],
+  [["novorizontino", "gremio novorizontino"],"NOV","#F7D417","#111111","Novorizontino","Brazil"],
+  [["ituano"],"ITU","#E30613","#111111","Ituano","Brazil"],
+  [["portuguesa"],"POR","#E30613","#0B7A3B","Portuguesa","Brazil"],
+  [["juventus sp", "juventus da mooca"],"JTS","#8B1E3F","#FFFFFF","Juventus SP","Brazil"],
+  [["sao bernardo"],"SBC","#F7D417","#111111","Sao Bernardo","Brazil"],
+  [["santo andre"],"STA","#1F4FA8","#FFFFFF","Santo Andre","Brazil"],
+  [["sao caetano"],"SCA","#1F4FA8","#FFFFFF","Sao Caetano","Brazil"],
+  [["agua santa"],"AGS","#1F4FA8","#E30613","Agua Santa","Brazil"],
+  [["botafogo sp"],"BSP","#E30613","#FFFFFF","Botafogo SP","Brazil"],
+  [["ferroviaria"],"FER","#7A1E3A","#FFFFFF","Ferroviaria","Brazil"],
+  [["flamengo"],"FLA","#C8102E","#111111","Flamengo","Brazil"],
+  [["fluminense"],"FLU","#7A1E3A","#0B6E3B","Fluminense","Brazil"],
+  [["vasco"],"VAS","#111111","#FFFFFF","Vasco da Gama","Brazil"],
+  [["botafogo"],"BOT","#111111","#FFFFFF","Botafogo","Brazil"],
+  [["atletico mg", "atletico mineiro", "galo"],"CAM","#111111","#FFFFFF","Atletico Mineiro","Brazil"],
+  [["cruzeiro"],"CRU","#1E3A8A","#FFFFFF","Cruzeiro","Brazil"],
+  [["america mg", "america mineiro"],"AMG","#0B7A3B","#111111","America Mineiro","Brazil"],
+  [["gremio"],"GRE","#1B8FD1","#111111","Gremio","Brazil"],
+  [["internacional"],"INT","#C8102E","#FFFFFF","Internacional","Brazil"],
+  [["juventude"],"JUV","#0B7A3B","#FFFFFF","Juventude","Brazil"],
+  [["athletico", "athletico pr", "atletico pr", "atletico paranaense"],"CAP","#C8102E","#111111","Athletico Paranaense","Brazil"],
+  [["coritiba"],"CFC","#0B6E3B","#FFFFFF","Coritiba","Brazil"],
+  [["operario", "operario pr"],"OPE","#111111","#FFFFFF","Operario Ferroviario","Brazil"],
+  [["chapecoense"],"CHA","#0B7A3B","#FFFFFF","Chapecoense","Brazil"],
+  [["avai"],"AVA","#1F4FA8","#FFFFFF","Avai","Brazil"],
+  [["figueirense"],"FIG","#111111","#FFFFFF","Figueirense","Brazil"],
+  [["criciuma"],"CRI","#F7D417","#111111","Criciuma","Brazil"],
+  [["bahia"],"BAH","#1F4FA8","#C8102E","Bahia","Brazil"],
+  [["vitoria"],"VIT","#C8102E","#111111","Vitoria","Brazil"],
+  [["fortaleza"],"FOR","#1F4FA8","#C8102E","Fortaleza","Brazil"],
+  [["ceara"],"CEA","#111111","#FFFFFF","Ceara","Brazil"],
+  [["sport"],"SPT","#C8102E","#111111","Sport Recife","Brazil"],
+  [["nautico"],"NAU","#C8102E","#FFFFFF","Nautico","Brazil"],
+  [["santa cruz"],"SCZ","#C8102E","#111111","Santa Cruz","Brazil"],
+  [["crb"],"CRB","#C8102E","#FFFFFF","CRB","Brazil"],
+  [["csa"],"CSA","#1F4FA8","#FFFFFF","CSA","Brazil"],
+  [["remo"],"REM","#1E3A8A","#FFFFFF","Remo","Brazil"],
+  [["paysandu"],"PAY","#1B8FD1","#FFFFFF","Paysandu","Brazil"],
+  [["goias"],"GOI","#0B7A3B","#FFFFFF","Goias","Brazil"],
+  [["atletico go", "atletico goianiense"],"ACG","#C8102E","#111111","Atletico Goianiense","Brazil"],
+  [["vila nova"],"VIL","#C8102E","#FFFFFF","Vila Nova","Brazil"],
+  [["cuiaba"],"CUI","#0B7A3B","#F7D417","Cuiaba","Brazil"],
+  [["amazonas"],"AMZ","#F7D417","#111111","Amazonas","Brazil"],
+  [["brasil", "selecao brasileira", "selecao"],"BRA","#F7D417","#0B7A3B","Brazil",""],
+  [["boca juniors", "boca"],"BOC","#1E3A8A","#F7D417","Boca Juniors","Argentina"],
+  [["river plate", "river"],"RIV","#FFFFFF","#E30613","River Plate","Argentina"],
+  [["racing", "racing club"],"RAC","#7DB9E8","#FFFFFF","Racing Club","Argentina"],
+  [["independiente del valle"],"IDV","#111111","#1E3A8A","Independiente del Valle","Ecuador"],
+  [["independiente medellin", "dim"],"DIM","#C8102E","#1E3A8A","Independiente Medellin","Colombia"],
+  [["independiente"],"IND","#C8102E","#FFFFFF","Independiente","Argentina"],
+  [["san lorenzo"],"SLO","#1E3A8A","#C8102E","San Lorenzo","Argentina"],
+  [["velez", "velez sarsfield"],"VEL","#FFFFFF","#1E3A8A","Velez Sarsfield","Argentina"],
+  [["estudiantes", "estudiantes de la plata", "estudiantes lp"],"EST","#C8102E","#FFFFFF","Estudiantes","Argentina"],
+  [["talleres", "talleres de cordoba"],"TAL","#1E3A8A","#FFFFFF","Talleres","Argentina"],
+  [["lanus"],"LAN","#7A1E3A","#FFFFFF","Lanus","Argentina"],
+  [["argentinos juniors", "argentinos"],"ARJ","#C8102E","#FFFFFF","Argentinos Juniors","Argentina"],
+  [["rosario central"],"ROS","#F7D417","#1E3A8A","Rosario Central","Argentina"],
+  [["newells", "newells old boys", "newell s old boys"],"NOB","#C8102E","#111111","Newell's Old Boys","Argentina"],
+  [["huracan"],"HUR","#FFFFFF","#C8102E","Huracan","Argentina"],
+  [["defensa y justicia", "defensa"],"DYJ","#F7D417","#0B7A3B","Defensa y Justicia","Argentina"],
+  [["godoy cruz"],"GOD","#1E3A8A","#FFFFFF","Godoy Cruz","Argentina"],
+  [["belgrano"],"BEL","#7DB9E8","#FFFFFF","Belgrano","Argentina"],
+  [["gimnasia", "gimnasia la plata", "gimnasia lp"],"GIM","#1E3A8A","#FFFFFF","Gimnasia La Plata","Argentina"],
+  [["banfield"],"BAN","#0B7A3B","#FFFFFF","Banfield","Argentina"],
+  [["argentina", "selecao argentina"],"ARG","#7DB9E8","#FFFFFF","Argentina",""],
+  [["penarol"],"PEN","#F7D417","#111111","Penarol","Uruguay"],
+  [["nacional", "nacional uy", "nacional montevideo", "club nacional"],"NAC","#FFFFFF","#1E3A8A","Nacional","Uruguay"],
+  [["liverpool montevideo", "liverpool uy", "liverpool fc uruguai"],"LIV","#111111","#1E3A8A","Liverpool Montevideo","Uruguay"],
+  [["defensor", "defensor sporting"],"DEF","#7A1E8A","#FFFFFF","Defensor Sporting","Uruguay"],
+  [["danubio"],"DAN","#FFFFFF","#111111","Danubio","Uruguay"],
+  [["uruguai", "selecao uruguaia"],"URU","#7DB9E8","#111111","Uruguay",""],
+  [["colo colo"],"COL","#FFFFFF","#111111","Colo Colo","Chile"],
+  [["universidad de chile", "u de chile"],"UCH","#1E3A8A","#C8102E","Universidad de Chile","Chile"],
+  [["universidad catolica", "u catolica"],"UCA","#FFFFFF","#1E3A8A","Universidad Catolica","Chile"],
+  [["palestino"],"PST","#0B7A3B","#C8102E","Palestino","Chile"],
+  [["huachipato"],"HUA","#1E3A8A","#111111","Huachipato","Chile"],
+  [["cobresal"],"COB","#F59E0B","#FFFFFF","Cobresal","Chile"],
+  [["coquimbo unido", "coquimbo"],"COQ","#F7D417","#111111","Coquimbo Unido","Chile"],
+  [["atletico nacional"],"ATN","#0B7A3B","#FFFFFF","Atletico Nacional","Colombia"],
+  [["millonarios"],"MIL","#1E3A8A","#FFFFFF","Millonarios","Colombia"],
+  [["america de cali"],"AME","#C8102E","#FFFFFF","America de Cali","Colombia"],
+  [["junior", "junior barranquilla"],"JUN","#C8102E","#FFFFFF","Junior","Colombia"],
+  [["deportes tolima", "tolima"],"TOL","#7A1E3A","#F7D417","Deportes Tolima","Colombia"],
+  [["once caldas"],"ONC","#FFFFFF","#111111","Once Caldas","Colombia"],
+  [["santa fe"],"SFE","#C8102E","#FFFFFF","Santa Fe","Colombia"],
+  [["olimpia"],"OLI","#FFFFFF","#111111","Olimpia","Paraguay"],
+  [["cerro porteno"],"CER","#1E3A8A","#C8102E","Cerro Porteno","Paraguay"],
+  [["libertad"],"LIB","#111111","#FFFFFF","Libertad","Paraguay"],
+  [["guarani py", "guarani paraguai", "club guarani"],"GPY","#F7D417","#111111","Guarani","Paraguay"],
+  [["ldu", "ldu quito", "liga de quito"],"LDU","#FFFFFF","#1E3A8A","LDU Quito","Ecuador"],
+  [["barcelona sc", "barcelona de guayaquil"],"BSC","#F7D417","#111111","Barcelona SC","Ecuador"],
+  [["emelec"],"EME","#1E3A8A","#FFFFFF","Emelec","Ecuador"],
+  [["aucas"],"AUC","#F7D417","#C8102E","Aucas","Ecuador"],
+  [["alianza lima"],"ALI","#1E3A8A","#FFFFFF","Alianza Lima","Peru"],
+  [["universitario", "universitario de deportes"],"UNI","#F5F0DC","#7A1E3A","Universitario","Peru"],
+  [["sporting cristal"],"SCR","#7DB9E8","#FFFFFF","Sporting Cristal","Peru"],
+  [["melgar"],"MEL","#C8102E","#111111","Melgar","Peru"],
+  [["bolivar"],"BOL","#7DB9E8","#FFFFFF","Bolivar","Bolivia"],
+  [["the strongest"],"STR","#F7D417","#111111","The Strongest","Bolivia"],
+  [["always ready"],"ALW","#FFFFFF","#C8102E","Always Ready","Bolivia"],
+  [["caracas"],"CAR","#C8102E","#FFFFFF","Caracas","Venezuela"],
+  [["deportivo tachira", "tachira"],"TAC","#F7D417","#111111","Deportivo Tachira","Venezuela"],
+  [["real madrid"],"RMA","#FFFFFF","#F5C542","Real Madrid","Spain"],
+  [["barcelona", "fc barcelona"],"BAR","#1E3A8A","#A50044","Barcelona","Spain"],
+  [["atletico de madrid", "atletico madrid"],"ATM","#C8102E","#FFFFFF","Atletico Madrid","Spain"],
+  [["manchester city"],"MCI","#6CABDD","#FFFFFF","Manchester City","England"],
+  [["manchester united"],"MUN","#C8102E","#111111","Manchester United","England"],
+  [["liverpool"],"LIV","#C8102E","#FFFFFF","Liverpool","England"],
+  [["chelsea"],"CHE","#1E3A8A","#FFFFFF","Chelsea","England"],
+  [["arsenal"],"ARS","#C8102E","#FFFFFF","Arsenal","England"],
+  [["tottenham"],"TOT","#FFFFFF","#111111","Tottenham","England"],
+  [["bayern", "bayern de munique", "bayern munich"],"BAY","#C8102E","#FFFFFF","Bayern Munich","Germany"],
+  [["borussia dortmund", "dortmund"],"BVB","#F7D417","#111111","Borussia Dortmund","Germany"],
+  [["psg", "paris saint germain"],"PSG","#1E3A8A","#C8102E","Paris SG","France"],
+  [["juventus"],"JUV","#111111","#FFFFFF","Juventus","Italy"],
+  [["milan", "ac milan"],"MIL","#C8102E","#111111","AC Milan","Italy"],
+  [["inter de milao", "internazionale", "inter milan"],"INT","#1E3A8A","#111111","Inter Milan","Italy"],
+  [["benfica"],"BEN","#C8102E","#FFFFFF","Benfica","Portugal"],
+  [["porto", "fc porto"],"POR","#1E3A8A","#FFFFFF","FC Porto","Portugal"],
+  [["sporting", "sporting cp"],"SCP","#0B7A3B","#FFFFFF","Sporting CP","Portugal"]
 ];
 const CLASSICOS = [
   ['Dérbi Paulista',['corinthians'],['palmeiras']],['Majestoso',['sao paulo','spfc'],['corinthians']],['Choque-Rei',['palmeiras'],['sao paulo','spfc']],
@@ -612,9 +804,6 @@ function clubStyle(name){
   const hue = h % 360;
   return { code, c1: `hsl(${hue} 50% 34%)`, c2: `hsl(${hue} 60% 62%)`, ct: '#FFFFFF' };
 }
-$('#dl-clubes').innerHTML = CLUBES.map(c => `<option value="${esc(c)}">`).join('');
-$('#dl-estadios').innerHTML = ESTADIOS.map(([s, c]) => `<option value="${esc(s)}">${esc(c)}</option>`).join('');
-$('#dl-comps').innerHTML = COMPS.map(c => `<option value="${esc(c)}">`).join('');
 
 /* ---------- exemplo (fictício) ---------- */
 const DEMO_PROFILE = { name: 'Torcedor Exemplo', myTeam: 'Corinthians', avatar: null };
@@ -627,16 +816,19 @@ const DEMO = [
   ['2025-10-18','Red Bull Bragantino',2,2,'Corinthians','Brasileirão Série A','Nabi Abi Chedid','Bragança Paulista','Brasil',12000,3,'',''],
   ['2025-11-30','Corinthians',1,3,'Bahia','Brasileirão Série A','Neo Química Arena','São Paulo','Brasil',40100,1,'Pai','Chuva forte.'],
   ['2026-02-22','São Paulo',1,2,'Corinthians','Paulistão','Morumbis','São Paulo','Brasil',58400,5,'',''],
-  ['2026-04-14','Boca Juniors',1,0,'Corinthians','Copa Libertadores','La Bombonera','Buenos Aires','Argentina',53000,4,'Excursão da torcida',''],
+  ['2026-04-14','Boca Juniors',1,0,'Corinthians','Copa Libertadores','La Bombonera','Buenos Aires','Argentina',53000,4,'Excursão da torcida','Perdemos no tempo normal e passamos nos pênaltis.',3,4],
   ['2026-05-03','Flamengo',2,2,'Fluminense','Brasileirão Série A','Maracanã','Rio de Janeiro','Brasil',61000,5,'Sozinho','Primeira vez no Maracanã.'],
   ['2026-07-12','Corinthians',3,0,'Grêmio','Copa do Brasil','Neo Química Arena','São Paulo','Brasil',43900,5,'Pai',''],
   ['2026-08-31','Santos',0,0,'Corinthians','Brasileirão Série A','Vila Belmiro','Santos','Brasil',14800,2,'',''],
   ['2026-09-20','São Bernardo FC',1,1,'Santo André','Paulistão A2','Estádio 1º de Maio','São Bernardo do Campo','Brasil',6210,4,'Amigos do trabalho','Clássico do ABC, ingresso a 30 reais.'],
   ['2026-10-05','Corinthians',2,1,'Palmeiras','Brasileirão Série A','Neo Química Arena','São Paulo','Brasil',45120,5,'Primo e tio','Virada no segundo tempo, estádio tremendo.']
-].map((r, i) => ({ id: 'demo-' + i, date: r[0], home: r[1], hg: r[2], ag: r[3], away: r[4], comp: r[5], stadium: r[6], city: r[7], country: r[8], att: r[9], rating: r[10], with: r[11], notes: r[12], createdAt: i, cover: null }));
+].map((r, i) => ({ id: 'demo-' + i, date: r[0], home: r[1], hg: r[2], ag: r[3], away: r[4], comp: r[5], stadium: r[6], city: r[7], country: r[8], att: r[9], rating: r[10], with: r[11], notes: r[12], ph: r[13] ?? null, pa: r[14] ?? null, createdAt: i, cover: null }));
 
 /* ---------- estado ---------- */
-const state = { loaded: false, loadError: null, matches: [], profile: { name: '', myTeam: '', avatar: null }, logos: {}, demo: false, year: 'all', pyear: 'all', tab: 'jogos', query: '', flash: null, allBadges: false, uid: null, email: '' };
+const EMPTY_F = { year: '', team: '', stadium: '', comp: '', res: '' };
+const lsGet = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+const state = { f: { ...EMPTY_F }, sort: lsGet('cad-sort') === 'desc' ? 'desc' : 'asc', loaded: false, loadError: null, matches: [], profile: { name: '', myTeam: '', avatar: null }, logos: {}, demo: false, year: 'all', pyear: 'all', tab: 'jogos', query: '', flash: null, allBadges: false, uid: null, email: '' };
 const data = () => state.demo ? { matches: DEMO, profile: DEMO_PROFILE } : { matches: state.matches, profile: state.profile };
 const findMatch = id => data().matches.find(m => m.id === id);
 
@@ -647,8 +839,8 @@ const sb = configured && window.supabase ? window.supabase.createClient(CFG.SUPA
 const BUCKET = 'fotos';
 const must = async q => { const r = await q; if (r.error) throw r.error; return r.data; };
 
-const fromRow = r => ({ id: r.id, date: r.date, home: r.home, away: r.away, hg: +r.hg || 0, ag: +r.ag || 0, comp: r.comp || '', stadium: r.stadium || '', city: r.city || '', country: r.country || '', att: +r.att || 0, rating: +r.rating || 0, with: r.with_who || '', notes: r.notes || '', cover: r.cover_path ? { path: r.cover_path } : null, createdAt: Date.parse(r.created_at) || 0 });
-const toRow = (id, m) => ({ id, user_id: state.uid, date: m.date, home: m.home, away: m.away, hg: m.hg, ag: m.ag, comp: m.comp || null, stadium: m.stadium || null, city: m.city || null, country: m.country || null, att: m.att || null, rating: m.rating || null, with_who: m.with || null, notes: m.notes || null, cover_path: m.cover?.path || null });
+const fromRow = r => ({ id: r.id, date: r.date, home: r.home, away: r.away, hg: +r.hg || 0, ag: +r.ag || 0, comp: r.comp || '', stadium: r.stadium || '', city: r.city || '', country: r.country || '', att: +r.att || 0, rating: +r.rating || 0, with: r.with_who || '', notes: r.notes || '', cover: r.cover_path ? { path: r.cover_path } : null, ph: r.pen_home ?? null, pa: r.pen_away ?? null, createdAt: Date.parse(r.created_at) || 0 });
+const toRow = (id, m) => ({ id, user_id: state.uid, date: m.date, home: m.home, away: m.away, hg: m.hg, ag: m.ag, comp: m.comp || null, stadium: m.stadium || null, city: m.city || null, country: m.country || null, att: m.att || null, rating: m.rating || null, with_who: m.with || null, notes: m.notes || null, cover_path: m.cover?.path || null, pen_home: hasPens(m) ? m.ph : null, pen_away: hasPens(m) ? m.pa : null });
 
 const api = {
   async load(){
@@ -659,10 +851,17 @@ const api = {
     ]);
     state.matches = (ms || []).map(fromRow);
     state.profile = { name: pf?.name || '', myTeam: pf?.my_team || '', avatar: pf?.avatar_path ? { path: pf.avatar_path } : null };
-    state.logos = {}; (lg || []).forEach(l => { state.logos[l.club_key] = { name: l.name, url: l.url, path: l.path, source: l.source }; });
+    state.logos = {}; (lg || []).forEach(l => { state.logos[l.club_key] = { name: l.name, url: l.url, path: l.path, source: l.source, at: l.updated_at || '' }; });
   },
   async saveMatch(id, m){
-    const row = await must(sb.from('matches').upsert(toRow(id, m)).select().single());
+    let row;
+    try { row = await must(sb.from('matches').upsert(toRow(id, m)).select().single()); }
+    catch (e){
+      if (!/pen_home|pen_away/.test(String(e?.message))) throw e;
+      const { pen_home, pen_away, ...rest } = toRow(id, m);
+      row = await must(sb.from('matches').upsert(rest).select().single());
+      if (hasPens(m)) toast('O jogo foi salvo, mas os pênaltis ainda não: falta atualizar o banco no Supabase.');
+    }
     const saved = fromRow(row);
     const i = state.matches.findIndex(x => x.id === id);
     if (i > -1) state.matches[i] = saved; else state.matches.push(saved);
@@ -671,7 +870,10 @@ const api = {
   async insertMany(list){
     const out = [];
     for (let i = 0; i < list.length; i += 200){
-      const rows = await must(sb.from('matches').insert(list.slice(i, i + 200).map(m => toRow(uuid(), m))).select());
+      const chunk = list.slice(i, i + 200).map(m => toRow(uuid(), m));
+      let rows;
+      try { rows = await must(sb.from('matches').insert(chunk).select()); }
+      catch (e){ if (!/pen_home|pen_away/.test(String(e?.message))) throw e; rows = await must(sb.from('matches').insert(chunk.map(({ pen_home, pen_away, ...r }) => r)).select()); }
       out.push(...rows.map(fromRow));
       toast(`Importando… ${Math.min(i + 200, list.length)}/${list.length}`);
     }
@@ -686,6 +888,7 @@ const api = {
     state.profile = { ...p }; render(); queueLogos();
   },
   async saveLogo(key, rec){
+    rec = { ...rec, at: new Date().toISOString() };
     state.logos[key] = rec;
     if (state.demo || !sb || !state.uid) return;
     await must(sb.from('club_logos').upsert({ user_id: state.uid, club_key: key, name: rec.name || null, url: rec.url || null, path: rec.path || null, source: rec.source, updated_at: new Date().toISOString() }));
@@ -762,7 +965,7 @@ async function searchTeams(term){
   }
   return [];
 }
-function pickTeam(teams, term, country){
+function pickTeam(teams, term, country, aliases = []){
   const nt = norm(term);
   const list = (teams || []).filter(t => (t.strSport || '') === 'Soccer' && (t.strBadge || t.strTeamBadge));
   if (!list.length) return null;
@@ -771,6 +974,7 @@ function pickTeam(teams, term, country){
     let s = 0;
     if (country && t.strCountry === country) s += 5;
     if (!country && t.strCountry === 'Brazil') s += 1;
+    if (aliases.includes(n)) s += 4;
     if (n === nt) s += 4; else if (n.startsWith(nt) || nt.startsWith(n)) s += 2; else if (alt.includes(nt)) s += 1;
     if (/\b(women|feminin|fem|u ?1\d|u ?2\d|sub ?\d\d|ii|b)\b/.test(n)) s -= 6;
     return s;
@@ -782,7 +986,7 @@ function pickTeam(teams, term, country){
 }
 async function lookupLogo(name){
   const hit = clubHit(name);
-  if (hit) return pickTeam(await searchTeams(hit[4]), hit[4], hit[5]);
+  if (hit) return pickTeam(await searchTeams(hit[4]), hit[4], hit[5], hit[0]);
   const full = plain(name).replace(/[^A-Za-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
   let r = pickTeam(await searchTeams(full), full, '');
   if (r) return r;
@@ -790,6 +994,8 @@ async function lookupLogo(name){
   if (short && short !== full){ await sleep(2100); r = pickTeam(await searchTeams(short), short, ''); }
   return r;
 }
+const LOGO_CUTOFF = '2026-10-15T01:30:00Z';
+const needsLookup = rec => !rec || (rec.source !== 'manual' && (!rec.at || rec.at < LOGO_CUTOFF));
 const logoQueue = []; const logoTried = new Set(); let logoBusy = false, logoRenderT;
 function allClubNames(){
   const mp = new Map(); const { matches, profile } = data();
@@ -800,7 +1006,7 @@ function allClubNames(){
 function queueLogos(){
   if (logoApiDown) return;
   for (const [k, n] of allClubNames()){
-    if (state.logos[k] || logoTried.has(k)) continue;
+    if (!needsLookup(state.logos[k]) || logoTried.has(k)) continue;
     logoTried.add(k); logoQueue.push({ k, n });
   }
   pumpLogos();
@@ -825,13 +1031,20 @@ function fmtLong(s){ const d = parseD(s); return `${DIAS[d.getDay()]}, ${d.getDa
 const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
 const sortAsc = arr => [...arr].sort((a, b) => (a.date || '').localeCompare(b.date || '') || (a.createdAt || 0) - (b.createdAt || 0));
 const sameTeam = (a, b) => { const x = norm(a), y = norm(b); return !!x && !!y && (x === y || x.startsWith(y + ' ') || y.startsWith(x + ' ')); };
+const hasPens = m => m && m.ph != null && m.pa != null && m.ph !== '' && m.pa !== '' && +m.ph !== +m.pa;
+const winnerSide = m => hasPens(m) ? (+m.ph > +m.pa ? 'h' : 'a') : (m.hg > m.ag ? 'h' : m.ag > m.hg ? 'a' : '');
+// Pé-quente: quem passa nos pênaltis conta como vitória; quem cai conta como derrota.
 function resultFor(m, team){
   if (!team) return null;
-  let mine, other;
-  if (sameTeam(m.home, team)){ mine = m.hg; other = m.ag; } else if (sameTeam(m.away, team)){ mine = m.ag; other = m.hg; } else return null;
+  let side;
+  if (sameTeam(m.home, team)) side = 'h'; else if (sameTeam(m.away, team)) side = 'a'; else return null;
+  if (hasPens(m)) return winnerSide(m) === side ? 'vp' : 'dp';
+  const mine = side === 'h' ? m.hg : m.ag, other = side === 'h' ? m.ag : m.hg;
   return mine > other ? 'v' : mine === other ? 'e' : 'd';
 }
-const RES_TXT = { v: 'VITÓRIA', e: 'EMPATE', d: 'DERROTA' };
+const isWin = r => r === 'v' || r === 'vp', isLoss = r => r === 'd' || r === 'dp';
+const RES_TXT = { v: 'VITÓRIA', e: 'EMPATE', d: 'DERROTA', vp: 'CLASSIFICOU', dp: 'ELIMINADO' };
+const RES_LONG = { v: 'Vitória', e: 'Empate', d: 'Derrota', vp: 'Classificou nos pênaltis', dp: 'Eliminado nos pênaltis' };
 let toastT;
 function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 3200); }
 const initials = s => { const w = String(s || '').trim().split(/\s+/).filter(Boolean); return ((w[0] || '?')[0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase(); };
@@ -844,56 +1057,66 @@ function compute(matches, profile, year){
   const group = (arr, f) => { const mp = new Map(); arr.forEach(m => { const v = f(m); (Array.isArray(v) ? v : [v]).forEach(x => { const k = norm(x); if (!k) return; const e = mp.get(k) || { name: x, n: 0, items: [] }; e.n++; e.name = x; e.items.push(m); mp.set(k, e); }); }); return mp; };
   const stadiums = group(list, m => m.stadium), clubs = group(list, m => [m.home, m.away]), cities = group(list, m => m.city), countries = group(list, m => m.country || 'Brasil'), comps = group(list, m => m.comp);
   const goals = list.reduce((s, m) => s + (+m.hg || 0) + (+m.ag || 0), 0);
-  const my = profile.myTeam, rec = { v: 0, e: 0, d: 0, gp: 0, gc: 0, n: 0 };
-  if (my) list.forEach(m => { const r = resultFor(m, my); if (!r) return; rec[r]++; rec.n++; const home = sameTeam(m.home, my); rec.gp += +(home ? m.hg : m.ag) || 0; rec.gc += +(home ? m.ag : m.hg) || 0; });
+  const my = profile.myTeam, rec = { v: 0, e: 0, d: 0, gp: 0, gc: 0, n: 0, pv: 0, pd: 0 };
+  if (my) list.forEach(m => { const r = resultFor(m, my); if (!r) return; if (r === 'vp') rec.pv++; if (r === 'dp') rec.pd++; rec[isWin(r) ? 'v' : isLoss(r) ? 'd' : 'e']++; rec.n++; const home = sameTeam(m.home, my); rec.gp += +(home ? m.hg : m.ag) || 0; rec.gc += +(home ? m.ag : m.hg) || 0; });
   rec.aprov = rec.n ? Math.round((rec.v * 3 + rec.e) / (rec.n * 3) * 100) : 0;
   const byYear = {}; all.forEach(m => { const y = (m.date || '').slice(0, 4); if (y) byYear[y] = (byYear[y] || 0) + 1; });
-  const wd = [0,0,0,0,0,0,0]; list.forEach(m => wd[parseD(m.date).getDay()]++);
   const top = (mp, k = 5) => [...mp.values()].sort((a, b) => b.n - a.n || a.name.localeCompare(b.name)).slice(0, k);
   const biggest = [...list].sort((a, b) => Math.abs(b.hg - b.ag) - Math.abs(a.hg - a.ag) || (b.hg + b.ag) - (a.hg + a.ag))[0];
   const mostGoals = [...list].sort((a, b) => (b.hg + b.ag) - (a.hg + a.ag))[0];
-  return { all, list, seq, stadiums, clubs, cities, countries, comps, goals, rec, byYear, wd, bestWd: wd.indexOf(Math.max(...wd)), top, biggest, mostGoals };
+  return { all, list, seq, stadiums, clubs, cities, countries, comps, goals, rec, byYear, top, biggest, mostGoals };
 }
 
-/* ---------- conquistas ---------- */
+/* ---------- conquistas (níveis bronze, prata, ouro e diamante) ---------- */
+const TIERS = ['Bloqueada', 'Bronze', 'Prata', 'Ouro', 'Diamante'];
 function badges(matches, profile){
   const all = sortAsc(matches), n = all.length;
   const st = new Set(all.map(m => norm(m.stadium)).filter(Boolean)).size;
   const ci = new Set(all.map(m => norm(m.city)).filter(Boolean)).size;
-  const intl = all.filter(m => m.country && !['brasil','brazil'].includes(norm(m.country))).length;
-  const classicos = new Set(all.map(classicoDe).filter(Boolean));
-  const templos = new Set(all.filter(m => isTemplo(m.stadium)).map(m => norm(m.stadium)));
-  const dias = new Set(all.map(m => parseD(m.date).getDay())).size;
+  const abroad = new Set(all.map(m => norm(m.country)).filter(c => c && c !== 'brasil' && c !== 'brazil')).size;
+  const classicGames = all.filter(classicoDe).length;
+  const templos = new Set(all.filter(m => isTemplo(m.stadium)).map(m => norm(m.stadium))).size;
+  const goals = all.reduce((t, m) => t + (+m.hg || 0) + (+m.ag || 0), 0);
+  const goleadas = all.filter(m => Math.abs(m.hg - m.ag) >= 4).length;
+  const zeros = all.filter(m => +m.hg === 0 && +m.ag === 0).length;
+  const pens = all.filter(hasPens).length;
   let semana = n ? 1 : 0;
   for (let i = 0; i < all.length; i++){ let k = 1; for (let j = i + 1; j < all.length; j++){ if ((parseD(all[j].date) - parseD(all[i].date)) / 864e5 <= 6) k++; else break; } semana = Math.max(semana, k); }
-  const my = profile.myTeam, mine = my ? all.filter(m => resultFor(m, my)) : [];
-  const mv = mine.filter(m => resultFor(m, my) === 'v').length, me = mine.filter(m => resultFor(m, my) === 'e').length;
-  const ap = mine.length ? (mv * 3 + me) / (mine.length * 3) : 0;
+  const my = profile.myTeam, mine = my ? all.map(m => resultFor(m, my)).filter(Boolean) : [];
+  const ap = mine.length ? Math.round(mine.reduce((t, r) => t + (isWin(r) ? 3 : r === 'e' ? 1 : 0), 0) / (mine.length * 3) * 100) : 0;
   const B = [];
-  const add = (name, desc, cur, goal, shape, tier) => B.push({ name, desc, cur: Math.min(cur, goal), goal, got: cur >= goal, shape, tier });
-  add('Estreia','Primeiro jogo registrado', n, 1, 'ticket', 'blue');
-  [10, 25, 50, 100, 250, 500].forEach(g => add(`${g} jogos`, `Veja ${g} jogos ao vivo`, n, g, 'shield', g >= 100 ? 'gold' : 'blue'));
-  [5, 10, 25, 50, 100].forEach(g => add(`Groundhopper ${g}`, `${g} estádios diferentes`, st, g, 'stadium', g >= 25 ? 'gold' : 'blue'));
-  [3, 5, 10, 20].forEach(g => add(`Estrada ${g}`, `Jogos em ${g} cidades`, ci, g, 'road', g >= 10 ? 'gold' : 'blue'));
-  add('Passaporte','Jogo fora do Brasil', intl, 1, 'globe', 'gold');
-  add('Dia de clássico','Esteja num clássico', classicos.size, 1, 'flame', 'red');
-  add('Colecionador','5 clássicos diferentes', classicos.size, 5, 'flame', 'gold');
-  add('Templo sagrado','Jogo num estádio histórico', templos.size, 1, 'temple', 'gold');
-  add('Peregrino','3 templos do futebol', templos.size, 3, 'temple', 'gold');
-  add('Goleada','4+ gols de diferença', all.some(m => Math.abs(m.hg - m.ag) >= 4) ? 1 : 0, 1, 'ball', 'green');
-  add('Chuva de gols','Jogo com 6+ gols', all.some(m => m.hg + m.ag >= 6) ? 1 : 0, 1, 'ball', 'gold');
-  add('Sofrimento','Aguente um 0 a 0', all.some(m => +m.hg === 0 && +m.ag === 0) ? 1 : 0, 1, 'ball', 'blue');
-  add('Semana cheia','3 jogos em 7 dias', semana, 3, 'calendar', 'blue');
-  add('Todo dia é dia','Jogos nos 7 dias da semana', dias, 7, 'calendar', 'gold');
-  add('Fiel','10 jogos do seu time', mine.length, 10, 'heart', 'red');
-  add('Pé-quente','10+ jogos do seu time com 60% de aproveitamento', mine.length >= 10 && ap >= .6 ? 1 : 0, 1, 'foot', 'green');
+  const add = (name, desc, cur, steps, shape, unit, gate) => {
+    let t = 0; if (!gate) steps.forEach((x, i) => { if (cur >= x) t = i + 1; });
+    B.push({ name, desc, cur, steps, t, next: steps[t], shape, unit, gate });
+  };
+  add('Arquibancada', 'Jogos vistos no estádio', n, [10, 25, 50, 100], 'shield', 'jogos');
+  add('Groundhopper', 'Estádios diferentes', st, [5, 10, 25, 50], 'stadium', 'estádios');
+  add('Estrada', 'Cidades com jogo visto', ci, [3, 5, 10, 20], 'road', 'cidades');
+  add('Passaporte', 'Países fora do Brasil', abroad, [1, 3, 5, 10], 'globe', 'países');
+  add('Clássicos', 'Clássicos na arquibancada', classicGames, [1, 3, 5, 10], 'flame', 'clássicos');
+  add('Templos', 'Estádios históricos visitados', templos, [1, 3, 5, 10], 'temple', 'templos');
+  add('Gols', 'Gols vistos ao vivo', goals, [25, 50, 100, 250], 'ball', 'gols');
+  add('Goleadas', 'Jogos com 4 ou mais gols de diferença', goleadas, [1, 3, 5, 10], 'ball', 'goleadas');
+  add('Sofrimento', 'Empates em 0 a 0 aguentados', zeros, [1, 3, 5, 10], 'ball', 'jogos');
+  add('Coração na mão', 'Decisões por pênaltis vistas', pens, [1, 2, 3, 5], 'target', 'decisões');
+  add('Maratona', 'Mais jogos numa mesma semana', semana, [2, 3, 4, 5], 'calendar', 'jogos');
+  if (my){
+    add('Fiel', `Jogos do ${my}`, mine.length, [10, 25, 50, 100], 'heart', 'jogos');
+    add('Pé-quente', 'Aproveitamento do seu time com você no estádio', ap, [50, 60, 70, 80], 'foot', '%', mine.length < 10 ? { cur: mine.length, need: 10 } : null);
+  }
   return B;
 }
-function badgeSvg(shape, tier){
-  const fill = { blue: 'url(#g-blue)', gold: 'url(#g-gold)', red: '#F87171', green: '#34D399' }[tier] || 'url(#g-blue)';
-  const ink = tier === 'gold' ? '#2A1A02' : '#fff';
+function badgeProgress(b){
+  if (b.gate) return { pct: b.gate.cur / b.gate.need * 100, txt: `${b.gate.cur}/${b.gate.need} jogos do seu time para valer` };
+  if (!b.next) return { pct: 100, txt: 'Nível máximo' };
+  const prev = b.t ? b.steps[b.t - 1] : 0;
+  const pct = Math.max(0, Math.min(100, (b.cur - prev) / (b.next - prev) * 100));
+  return { pct, txt: `${b.unit === '%' ? b.cur + '%' : b.cur}/${b.unit === '%' ? b.next + '%' : b.next} para ${TIERS[b.t + 1]}` };
+}
+function badgeSvg(shape, t){
+  const fill = ['#2A3245', 'url(#g-bronze)', 'url(#g-silver)', 'url(#g-gold)', 'url(#g-diamond)'][t] || '#2A3245';
+  const ink = t >= 2 ? '#141A2A' : '#fff';
   const g = {
-    ticket: `<path d="M14 22h16v12H14z" fill="none" stroke="${ink}" stroke-width="2.5"/><path d="M24 22v12" stroke="${ink}" stroke-width="2" stroke-dasharray="2 2"/>`,
     shield: `<path d="M22 18l7 3v5c0 4-3 7-7 8-4-1-7-4-7-8v-5z" fill="none" stroke="${ink}" stroke-width="2.5"/>`,
     stadium: `<ellipse cx="22" cy="28" rx="9" ry="5" fill="none" stroke="${ink}" stroke-width="2.5"/><path d="M14 25v-6M30 25v-6" stroke="${ink}" stroke-width="2.5"/>`,
     road: `<path d="M18 36l3-18M26 36l-3-18" stroke="${ink}" stroke-width="2.5" fill="none"/><path d="M22 22v3M22 29v3" stroke="${ink}" stroke-width="2"/>`,
@@ -901,6 +1124,7 @@ function badgeSvg(shape, tier){
     flame: `<path d="M22 17c5 5 7 8 7 12a7 7 0 0 1-14 0c0-3 2-5 3-6 0 3 2 4 3 4-1-4 0-7 1-10z" fill="${ink}"/>`,
     temple: `<path d="M13 23l9-5 9 5zM15 25v8M20 25v8M24 25v8M29 25v8M13 35h18" stroke="${ink}" stroke-width="2.2" fill="none" stroke-linejoin="round"/>`,
     ball: `<circle cx="22" cy="27" r="9" fill="none" stroke="${ink}" stroke-width="2.5"/><path d="M22 23l3.5 2.5-1.3 4h-4.4l-1.3-4z" fill="${ink}"/>`,
+    target: `<circle cx="22" cy="27" r="9" fill="none" stroke="${ink}" stroke-width="2.5"/><circle cx="22" cy="27" r="4.5" fill="none" stroke="${ink}" stroke-width="2"/><circle cx="22" cy="27" r="1.6" fill="${ink}"/>`,
     calendar: `<rect x="14" y="20" width="16" height="15" rx="2" fill="none" stroke="${ink}" stroke-width="2.5"/><path d="M14 25h16M18 17v5M26 17v5" stroke="${ink}" stroke-width="2.5"/>`,
     heart: `<path d="M22 34s-8-5-8-10a4.5 4.5 0 0 1 8-2.5 4.5 4.5 0 0 1 8 2.5c0 5-8 10-8 10z" fill="${ink}"/>`,
     foot: `<path d="M19 35c-3 0-4-3-3-7l1-6c.5-3 6-3 6.5 0l.5 6c.5 4-2 7-5 7z" fill="${ink}"/><circle cx="26" cy="19" r="1.8" fill="${ink}"/><circle cx="29" cy="22" r="1.5" fill="${ink}"/>`
@@ -926,11 +1150,11 @@ function hydrate(root = document){
   hydrateLogos(root);
 }
 function coverInner(m, seq, big = false){
-  const hw = m.hg > m.ag, aw = m.ag > m.hg, cl = classicoDe(m);
+  const w = winnerSide(m), hw = w === 'h', aw = w === 'a', cl = classicoDe(m);
   return `<div class="cv-top"><span class="glass">${esc(m.comp || 'Jogo')}</span>${cl ? `<span class="glass gold">${esc(cl)}</span>` : (seq ? `<span class="glass">Nº ${String(seq).padStart(3, '0')}</span>` : '')}</div>
     <div class="match">
       <div class="team ${aw ? 'lose' : ''}">${mono(m.home, big ? 'lg' : '')}<span>${esc(m.home)}</span></div>
-      <div class="score">${+m.hg}<i>:</i>${+m.ag}</div>
+      <div class="score-wrap"><div class="score">${+m.hg}<i>:</i>${+m.ag}</div>${hasPens(m) ? `<span class="pens">PÊN. ${+m.ph}–${+m.pa}</span>` : ''}</div>
       <div class="team ${hw ? 'lose' : ''}">${mono(m.away, big ? 'lg' : '')}<span>${esc(m.away)}</span></div>
     </div>`;
 }
@@ -938,7 +1162,7 @@ function ticket(m, seq, my){
   const r = resultFor(m, my), d = parseD(m.date);
   const venue = m.stadium || m.city || 'Estádio não informado';
   const sub = [m.stadium ? m.city : '', m.country && norm(m.country) !== 'brasil' ? m.country : ''].filter(Boolean).join(', ');
-  return `<button class="tk" id="tk-${esc(m.id)}" data-open="${esc(m.id)}" aria-label="Jogo ${seq}: ${esc(m.home)} ${+m.hg} a ${+m.ag} ${esc(m.away)}, ${esc(fmtLong(m.date))}">
+  return `<button class="tk" id="tk-${esc(m.id)}" data-open="${esc(m.id)}" aria-label="Jogo ${seq}: ${esc(m.home)} ${+m.hg} a ${+m.ag} ${esc(m.away)}${hasPens(m) ? `, pênaltis ${+m.ph} a ${+m.pa}` : ''}, ${esc(fmtLong(m.date))}">
     <div class="cover" data-cover="${esc(m.id)}">${coverInner(m, seq)}</div>
     <div class="foot">
       <div class="dt"><b>${String(d.getDate()).padStart(2, '0')}</b><span>${MESES[d.getMonth()]}<br>${d.getFullYear()}</span></div>
@@ -957,6 +1181,51 @@ function bannerHtml(){
 const isLoading = () => !state.demo && !state.loaded && !state.loadError;
 const vh = (pre, title, side = '') => `<header class="vh"><div><span class="vh-pre">${pre}</span><h1 class="vh-title">${title}</h1></div><div class="vh-side">${side}</div></header>`;
 
+/* ---------- filtros ---------- */
+const FILTER_LABEL = { year: 'Ano', team: 'Time', stadium: 'Estádio', comp: 'Competição', res: 'Resultado' };
+const RES_FILTER = { v: 'Vitórias', e: 'Empates', d: 'Derrotas' };
+function applyFilters(list, profile){
+  const f = state.f;
+  return list.filter(m => {
+    if (f.year && !(m.date || '').startsWith(f.year)) return false;
+    if (f.team && clubKey(m.home) !== clubKey(f.team) && clubKey(m.away) !== clubKey(f.team)) return false;
+    if (f.stadium && norm(m.stadium) !== norm(f.stadium)) return false;
+    if (f.comp && norm(m.comp) !== norm(f.comp)) return false;
+    if (f.res){ const r = resultFor(m, profile.myTeam); if (!r) return false; if (f.res === 'v' && !isWin(r)) return false; if (f.res === 'd' && !isLoss(r)) return false; if (f.res === 'e' && r !== 'e') return false; }
+    return true;
+  });
+}
+let fTmp = null;
+function openFilter(){
+  const { matches, profile } = data();
+  const S = compute(matches, profile, 'all');
+  fTmp = { ...state.f, sort: state.sort };
+  const opts = (sel, items, all) => { $(sel).innerHTML = `<option value="">${all}</option>` + items.map(([v, l]) => `<option value="${esc(v)}">${esc(l)}</option>`).join(''); };
+  opts('#fl-year', Object.keys(S.byYear).sort().reverse().map(y => [y, `${y} (${S.byYear[y]})`]), 'Todos os anos');
+  const byN = mp => [...mp.values()].sort((a, b) => b.n - a.n || a.name.localeCompare(b.name)).map(x => [x.name, `${x.name} (${x.n})`]);
+  opts('#fl-team', byN(S.clubs), 'Todos os times');
+  opts('#fl-stadium', byN(S.stadiums), 'Todos os estádios');
+  opts('#fl-comp', byN(S.comps), 'Todas as competições');
+  const setSel = (sel, v) => { const el = $(sel); el.value = v; if (el.value !== v) el.value = ''; };
+  setSel('#fl-year', fTmp.year); setSel('#fl-team', fTmp.team); setSel('#fl-stadium', fTmp.stadium); setSel('#fl-comp', fTmp.comp);
+  $('#fl-res-box').hidden = !profile.myTeam;
+  drawSeg();
+  $('#sh-filter').showModal();
+}
+function drawSeg(){
+  $$('#fl-res button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === fTmp.res)));
+  $$('#fl-sort button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === fTmp.sort)));
+}
+$('#fl-res').addEventListener('click', e => { const b = e.target.closest('button'); if (b){ fTmp.res = b.dataset.v; drawSeg(); } });
+$('#fl-sort').addEventListener('click', e => { const b = e.target.closest('button'); if (b){ fTmp.sort = b.dataset.v; drawSeg(); } });
+$('#flt-form').addEventListener('submit', e => {
+  e.preventDefault();
+  state.f = { year: $('#fl-year').value, team: $('#fl-team').value, stadium: $('#fl-stadium').value, comp: $('#fl-comp').value, res: $('#fl-res-box').hidden ? '' : fTmp.res };
+  state.sort = fTmp.sort; lsSet('cad-sort', state.sort);
+  $('#sh-filter').close(); renderJogos(); $('#main').scrollTo({ top: 0 });
+});
+$('#fl-clear').addEventListener('click', () => { state.f = { ...EMPTY_F }; $('#sh-filter').close(); renderJogos(); });
+
 /* ---------- aba Ingressos ---------- */
 function renderJogos(){
   const el = $('#v-jogos');
@@ -974,20 +1243,22 @@ function renderJogos(){
     </div></div>`;
     el.innerHTML = h; return;
   }
-  const years = Object.keys(S.byYear).sort();
-  if (state.year !== 'all' && !years.includes(state.year)) state.year = 'all';
   h += `<label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="sr">Buscar jogos</span><input id="q" type="search" placeholder="Time, estádio, cidade…" value="${esc(state.query)}" autocomplete="off">${state.query ? '<button type="button" data-act="clear-q">Limpar</button>' : ''}</label>`;
-  h += `<div class="chips" role="group" aria-label="Temporada">${['all', ...years].map(v => `<button class="chip" data-year="${v}" aria-pressed="${v === state.year}">${v === 'all' ? 'Todos' : v}</button>`).join('')}</div>`;
+  const nf = Object.values(state.f).filter(Boolean).length;
+  h += `<div class="tools"><button class="tool" data-act="filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtrar${nf ? `<span class="n">${nf}</span>` : ''}</button>
+    <button class="tool" data-act="sort"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v16M4 16l4 4 4-4M16 20V4M12 8l4-4 4 4"/></svg>${state.sort === 'asc' ? 'Mais antigos primeiro' : 'Mais recentes primeiro'}</button></div>`;
+  if (nf) h += `<div class="tools">${Object.entries(state.f).filter(([, v]) => v).map(([k, v]) => `<button class="fchip" data-unf="${k}" aria-label="Remover filtro ${esc(FILTER_LABEL[k])}"><b>${FILTER_LABEL[k]}</b>${esc(k === 'res' ? RES_FILTER[v] : v)}<span aria-hidden="true">✕</span></button>`).join('')}</div>`;
   const q = norm(state.query);
-  let hits = state.year === 'all' ? S.all : S.all.filter(m => (m.date || '').startsWith(state.year));
+  let hits = applyFilters(S.all, profile);
   if (q) hits = hits.filter(m => norm([m.home, m.away, m.stadium, m.city, m.country, m.comp, m.with, m.notes, m.date].join(' ')).includes(q));
-  if (!hits.length){ h += `<p class="hint">Nenhum jogo encontrado${state.query ? ` para “${esc(state.query)}”` : ''}.</p>`; }
+  if (state.sort === 'desc') hits = [...hits].reverse();
+  if (!hits.length){ h += `<p class="hint">Nenhum jogo encontrado com esses filtros${state.query ? ` e a busca “${esc(state.query)}”` : ''}.</p>`; }
   else {
-    if (hits.length > 4) h += `<button class="jump" data-act="jump"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>Ir para o jogo mais recente</button>`;
-    const byY = {}; hits.forEach(m => { const yy = (m.date || '????').slice(0, 4); (byY[yy] = byY[yy] || []).push(m); });
-    Object.keys(byY).sort().forEach(yy => {
-      h += `<div class="yr-head"><b>${esc(yy)}</b><span>${byY[yy].length} ${byY[yy].length === 1 ? 'jogo' : 'jogos'}</span></div><div class="tickets">${byY[yy].map(m => ticket(m, S.seq.get(m.id), profile.myTeam)).join('')}</div>`;
-    });
+    if (state.sort === 'asc' && hits.length > 4) h += `<button class="jump" data-act="jump"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>Ir para o jogo mais recente</button>`;
+    const byY = new Map(); hits.forEach(m => { const yy = (m.date || '????').slice(0, 4); if (!byY.has(yy)) byY.set(yy, []); byY.get(yy).push(m); });
+    for (const [yy, arr] of byY){
+      h += `<div class="yr-head"><b>${esc(yy)}</b><span>${arr.length} ${arr.length === 1 ? 'jogo' : 'jogos'}</span></div><div class="tickets">${arr.map(m => ticket(m, S.seq.get(m.id), profile.myTeam)).join('')}</div>`;
+    }
   }
   const had = document.activeElement && document.activeElement.id === 'q';
   const pos = had ? document.activeElement.selectionStart : 0;
@@ -1061,7 +1332,7 @@ function renderPerfil(){
       if (r.n >= 3) verdict = r.aprov >= 60 ? 'Pé-quente: o time rende quando você vai' : r.aprov >= 40 ? 'Na média' : 'Pé-frio: o time sofre quando você vai';
       h += `<section class="sec"><div class="sec-head"><h2>Seu time no estádio</h2></div>
         <div class="panel myteam">
-          <div class="mt-top">${mono(profile.myTeam)}<div><h3>${esc(profile.myTeam)}</h3><p>${r.n} ${r.n === 1 ? 'jogo' : 'jogos'} · ${r.gp} gols pró · ${r.gc} contra</p></div>
+          <div class="mt-top">${mono(profile.myTeam)}<div><h3>${esc(profile.myTeam)}</h3><p>${r.n} ${r.n === 1 ? 'jogo' : 'jogos'} · ${r.gp} gols pró · ${r.gc} contra</p>${r.pv + r.pd ? `<p>Pênaltis: ${r.pv ? `${r.pv} ${r.pv === 1 ? 'classificação conta' : 'classificações contam'} como vitória` : ''}${r.pv && r.pd ? ' e ' : ''}${r.pd ? `${r.pd} ${r.pd === 1 ? 'eliminação conta' : 'eliminações contam'} como derrota` : ''}</p>` : ''}</div>
           <div class="aprov"><b>${r.n ? r.aprov + '%' : '–'}</b><span>Aproveitamento</span></div></div>
           ${r.n ? `<div class="ved" role="img" aria-label="${r.v} vitórias, ${r.e} empates, ${r.d} derrotas">${r.v ? `<i style="flex:${r.v};background:var(--win)"></i>` : ''}${r.e ? `<i style="flex:${r.e};background:var(--draw)"></i>` : ''}${r.d ? `<i style="flex:${r.d};background:var(--loss)"></i>` : ''}</div>
           <div class="ved-l"><span><i class="dot" style="background:var(--win)"></i><b>${r.v}</b> vitórias</span><span><i class="dot" style="background:var(--draw)"></i><b>${r.e}</b> empates</span><span><i class="dot" style="background:var(--loss)"></i><b>${r.d}</b> derrotas</span></div>` : '<p class="hint">Nenhum jogo do seu time neste período.</p>'}
@@ -1069,20 +1340,17 @@ function renderPerfil(){
         </div></section>`;
     }
   }
-  const B = badges(matches, profile);
-  const got = B.filter(b => b.got);
-  const sortedAll = [...got, ...B.filter(b => !b.got).sort((a, b) => b.cur / b.goal - a.cur / a.goal)];
-  const sorted = state.allBadges ? sortedAll : sortedAll.slice(0, got.length + 6);
-  h += `<section class="sec"><div class="sec-head"><h2>Conquistas</h2><div class="bsum"><b>${got.length}</b><span class="label">de ${B.length}</span></div></div>
-    <div class="badges">${sorted.map(b => `<div class="badge ${b.got ? 'got' : 'locked'}">${badgeSvg(b.shape, b.tier)}<h3>${esc(b.name)}</h3><p>${esc(b.desc)}</p>${b.got ? '' : `<div class="prog"><i style="width:${b.cur / b.goal * 100}%"></i></div><span class="pt">${b.cur}/${b.goal}</span>`}</div>`).join('')}</div>
-    ${sortedAll.length > sorted.length || state.allBadges ? `<button class="btn ghost sm more" data-act="badges">${state.allBadges ? 'Mostrar menos' : `Ver todas as ${B.length}`}</button>` : ''}
-    ${profile.myTeam ? '' : '<p class="hint">Fiel e Pé-quente dependem do time do coração. Defina em Editar perfil.</p>'}
+  const B = badges(matches, profile).sort((a, b) => b.t - a.t || badgeProgress(b).pct - badgeProgress(a).pct);
+  const levels = B.reduce((t, b) => t + b.t, 0);
+  h += `<section class="sec"><div class="sec-head"><h2>Conquistas</h2><div class="bsum"><b>${levels}</b><span class="label">de ${B.length * 4} níveis</span></div></div>
+    <p class="hint">Cada conquista evolui: Bronze, Prata, Ouro e Diamante.</p>
+    <div class="badges">${B.map(b => { const p = badgeProgress(b); return `<div class="badge ${b.t ? '' : 'locked'}" data-t="${b.t}">${badgeSvg(b.shape, b.t)}<span class="lvl">${TIERS[b.t].toUpperCase()}</span><h3>${esc(b.name)}</h3><p>${esc(b.desc)}</p><span class="pips" aria-hidden="true">${[1,2,3,4].map(i => `<i class="${i <= b.t ? 'on' : ''}"></i>`).join('')}</span>${b.next || b.gate ? `<div class="prog"><i style="width:${p.pct}%"></i></div>` : ''}<span class="pt">${esc(p.txt)}</span></div>`; }).join('')}</div>
+    ${profile.myTeam ? '' : '<p class="hint">Fiel e Pé-quente aparecem quando você define o time do coração em Editar perfil.</p>'}
   </section>`;
   if (matches.length){
     const facts = [];
     if (S.biggest && S.biggest.hg !== S.biggest.ag) facts.push({ big: `${S.biggest.hg}:${S.biggest.ag}`, p: `Maior diferença: ${S.biggest.home} x ${S.biggest.away}`, id: S.biggest.id });
     if (S.mostGoals) facts.push({ big: `${S.mostGoals.hg + S.mostGoals.ag} gols`, p: `Jogo mais movimentado: ${S.mostGoals.home} x ${S.mostGoals.away}`, id: S.mostGoals.id });
-    if (S.list.length) facts.push({ big: DIAS[S.bestWd], p: `Seu dia favorito de jogo (${S.wd[S.bestWd]})` });
     const tc = S.top(S.comps, 1)[0]; if (tc) facts.push({ big: tc.name, p: `Competição que você mais viu (${tc.n})` });
     const att = S.list.filter(m => +m.att > 0).sort((a, b) => b.att - a.att)[0];
     if (att) facts.push({ big: fmtN(att.att), p: `Maior público: ${att.stadium || att.home + ' x ' + att.away}`, id: att.id });
@@ -1132,7 +1400,9 @@ document.addEventListener('click', e => {
   const y = e.target.closest('[data-year]'); if (y){ state.year = y.dataset.year; renderJogos(); return; }
   const py = e.target.closest('[data-pyear]'); if (py){ state.pyear = py.dataset.pyear; renderPerfil(); return; }
   const o = e.target.closest('[data-open]'); if (o){ openDetail(o.dataset.open); return; }
-  const st = e.target.closest('[data-stadium]'); if (st){ state.query = st.dataset.stadium; state.year = 'all'; renderJogos(); setTab('jogos'); return; }
+  const st = e.target.closest('[data-stadium]'); if (st){ state.query = ''; state.f = { ...EMPTY_F, stadium: st.dataset.stadium }; renderJogos(); setTab('jogos'); return; }
+  const uf = e.target.closest('[data-unf]'); if (uf){ state.f[uf.dataset.unf] = ''; renderJogos(); return; }
+  const sg = e.target.closest('.sugg button'); if (sg){ pickSugg(sg); return; }
   const c = e.target.closest('[data-close]'); if (c){ c.closest('dialog').close(); return; }
   const tp = e.target.closest('[data-toggle-pw]');
   if (tp){ const i = document.getElementById(tp.dataset.togglePw); const show = i.type === 'password'; i.type = show ? 'text' : 'password'; tp.textContent = show ? 'Ocultar' : 'Mostrar'; return; }
@@ -1147,6 +1417,8 @@ document.addEventListener('click', e => {
   else if (act === 'retry') loadAll();
   else if (act === 'badges'){ state.allBadges = !state.allBadges; renderPerfil(); }
   else if (act === 'clear-q'){ state.query = ''; renderJogos(); }
+  else if (act === 'filter') openFilter();
+  else if (act === 'sort'){ state.sort = state.sort === 'asc' ? 'desc' : 'asc'; lsSet('cad-sort', state.sort); renderJogos(); }
   else if (act === 'jump'){ const all = $$('#v-jogos .tk'); const last = all[all.length - 1]; if (last){ last.scrollIntoView({ block: 'center', behavior: 'smooth' }); last.classList.remove('flash'); void last.offsetWidth; last.classList.add('flash'); } }
 });
 document.addEventListener('input', e => { if (e.target.id === 'q'){ state.query = e.target.value; renderJogos(); } });
@@ -1166,6 +1438,41 @@ async function write(fn){
     return false;
   }
 }
+
+/* ---------- sugestões de times, estádios e competições ---------- */
+function suggestItems(kind){
+  const seen = new Map(), out = [];
+  const push = (v, extra, n) => { const k = norm(v); if (!k) return; const e = seen.get(k); if (e){ e.n += n; if (!e.extra && extra) e.extra = extra; return; } const it = { v, extra: extra || '', n }; seen.set(k, it); out.push(it); };
+  if (kind === 'clubs'){ state.matches.forEach(m => { push(m.home, '', 1); push(m.away, '', 1); }); if (state.profile.myTeam) push(state.profile.myTeam, '', 1); CLUBES.forEach(c => push(c, '', 0)); }
+  if (kind === 'stadiums'){ state.matches.forEach(m => push(m.stadium, m.city, 1)); ESTADIOS.forEach(([s, c]) => push(s, c, 0)); }
+  if (kind === 'comps'){ state.matches.forEach(m => push(m.comp, '', 1)); COMPS.forEach(c => push(c, '', 0)); }
+  return out.sort((a, b) => b.n - a.n);
+}
+let suggEl = null, suggInput = null;
+function closeSugg(){ if (suggEl) suggEl.remove(); suggEl = null; suggInput = null; }
+function openSugg(inp){
+  const kind = inp.dataset.suggest, q = norm(inp.value);
+  let items = suggestItems(kind);
+  if (q) items = items.filter(it => norm(it.v).includes(q) && norm(it.v) !== q).sort((a, b) => (norm(b.v).startsWith(q) - norm(a.v).startsWith(q)) || b.n - a.n);
+  items = items.slice(0, 7);
+  if (!items.length){ closeSugg(); return; }
+  if (!suggEl || suggInput !== inp){ closeSugg(); suggEl = document.createElement('div'); suggEl.className = 'sugg'; suggEl.setAttribute('role', 'listbox'); inp.parentElement.appendChild(suggEl); suggInput = inp; }
+  suggEl.style.top = (inp.offsetTop + inp.offsetHeight + 6) + 'px';
+  suggEl.innerHTML = items.map(it => `<button type="button" role="option" data-v="${esc(it.v)}">${kind === 'clubs' ? mono(it.v, 'sm') : ''}<span>${esc(it.v)}</span>${it.extra ? `<small>${esc(it.extra)}</small>` : ''}</button>`).join('');
+  hydrateLogos(suggEl);
+}
+function pickSugg(btn){
+  const inp = suggInput; if (!inp) return;
+  inp.value = btn.dataset.v; closeSugg();
+  inp.dispatchEvent(new Event('change', { bubbles: true }));
+  inp.focus({ preventScroll: true });
+  setTimeout(closeSugg, 0);
+}
+document.addEventListener('focusin', e => { if (e.target.matches && e.target.matches('[data-suggest]')) openSugg(e.target); });
+document.addEventListener('input', e => { if (e.target.matches && e.target.matches('[data-suggest]')) openSugg(e.target); });
+document.addEventListener('focusout', e => { if (e.target.matches && e.target.matches('[data-suggest]')){ const inp = e.target; setTimeout(() => { if (suggInput === inp && document.activeElement !== inp) closeSugg(); }, 300); } });
+document.addEventListener('mousedown', e => { if (e.target.closest && e.target.closest('.sugg')) e.preventDefault(); });
+$$('dialog.sheet').forEach(d => d.addEventListener('close', closeSugg));
 
 /* ---------- formulário de jogo ---------- */
 let editing = null, formRating = 0, photo = { file: null, removed: false, url: null };
@@ -1190,12 +1497,20 @@ async function openForm(id){
   $('#f-city').value = m?.city || ''; $('#f-country').value = m?.country || 'Brasil';
   $('#f-att').value = m?.att || ''; $('#f-with').value = m?.with || ''; $('#f-notes').value = m?.notes || '';
   formRating = m?.rating || 0; drawRate();
+  $('#f-pen').checked = hasPens(m); $('#f-ph').value = hasPens(m) ? m.ph : ''; $('#f-pa').value = hasPens(m) ? m.pa : ''; syncPen();
   photo = { file: null, removed: false, url: m?.cover ? await photoURL(m.cover) : null };
   $('#f-photo').value = ''; showDrop();
   $('#f-err').hidden = true;
   if ($('#sh-detail').open) $('#sh-detail').close();
   $('#sh-form').showModal();
 }
+function syncPen(){
+  $('#f-pen-box').hidden = !$('#f-pen').checked;
+  $('#f-pen-hn').textContent = $('#f-home').value.trim() || 'Mandante';
+  $('#f-pen-an').textContent = $('#f-away').value.trim() || 'Visitante';
+}
+$('#f-pen').addEventListener('change', syncPen);
+['#f-home', '#f-away'].forEach(s => { $(s).addEventListener('input', syncPen); $(s).addEventListener('change', syncPen); });
 $('#f-photo').addEventListener('change', e => { const f = e.target.files[0]; if (f){ photo.file = f; photo.removed = false; showDrop(); } });
 $('#f-photo-rm').addEventListener('click', () => { photo.file = null; photo.removed = true; $('#f-photo').value = ''; showDrop(); });
 $('#f-stadium').addEventListener('change', e => {
@@ -1204,7 +1519,8 @@ $('#f-stadium').addEventListener('change', e => {
   const prev = state.matches.slice().reverse().find(m => norm(m.stadium) === n && m.city);
   const city = prev?.city || known?.[1];
   if (city && !$('#f-city').value) $('#f-city').value = city;
-  if (prev?.country && (!$('#f-country').value || $('#f-country').value === 'Brasil')) $('#f-country').value = prev.country;
+  const country = prev?.country || known?.[2];
+  if (country && (!$('#f-country').value || $('#f-country').value === 'Brasil')) $('#f-country').value = country;
 });
 $('#form').addEventListener('submit', async e => {
   e.preventDefault();
@@ -1216,6 +1532,12 @@ $('#form').addEventListener('submit', async e => {
   if (!Number.isInteger(hg) || !Number.isInteger(ag) || hg < 0 || ag < 0) return fail('Informe o placar com números inteiros (use 0 para nenhum gol).');
   if (!date) return fail('Informe a data do jogo.');
   if (date > todayISO()) return fail('A data está no futuro. A caderneta registra jogos que você já viu.');
+  let ph = null, pa = null;
+  if ($('#f-pen').checked){
+    ph = $('#f-ph').value === '' ? NaN : +$('#f-ph').value; pa = $('#f-pa').value === '' ? NaN : +$('#f-pa').value;
+    if (!Number.isInteger(ph) || !Number.isInteger(pa) || ph < 0 || pa < 0) return fail('Informe quantos pênaltis cada time converteu.');
+    if (ph === pa) return fail('Na disputa de pênaltis um dos times precisa vencer. Confira o placar dos pênaltis.');
+  }
   err.hidden = true;
   const btn = $('#f-save'); btn.disabled = true; btn.textContent = 'Salvando…';
   const old = editing ? state.matches.find(x => x.id === editing) : null;
@@ -1225,7 +1547,7 @@ $('#form').addEventListener('submit', async e => {
     comp: $('#f-comp').value.trim(), stadium: $('#f-stadium').value.trim(), city: $('#f-city').value.trim(),
     country: $('#f-country').value.trim() || 'Brasil', att: +$('#f-att').value || 0,
     with: $('#f-with').value.trim(), notes: $('#f-notes').value.trim(), rating: formRating,
-    cover: old?.cover || null
+    ph, pa, cover: old?.cover || null
   };
   let oldCover = null;
   if (photo.file){
@@ -1240,7 +1562,7 @@ $('#form').addEventListener('submit', async e => {
     $('#sh-form').close();
     const seq = sortAsc(state.matches).findIndex(x => x.id === id) + 1;
     toast(editing ? 'Ingresso atualizado' : `Ingresso nº ${String(seq).padStart(3, '0')} guardado`);
-    state.flash = id; state.query = ''; state.year = 'all';
+    state.flash = id; state.query = ''; state.f = { ...EMPTY_F };
     setTab('jogos'); renderJogos(); queueLogos();
   } else if (photo.file && m.cover && m.cover !== old?.cover) removePhoto(m.cover);
 });
@@ -1260,7 +1582,8 @@ function openDetail(id){
     ['Estádio', [m.stadium, isTemplo(m.stadium) ? '(templo histórico)' : ''].filter(Boolean).join(' ')],
     ['Local', [m.city, m.country].filter(Boolean).join(', ')],
     ['Visita', m.stadium && visit ? `${visit}ª vez neste estádio` : ''],
-    ['Seu time', r ? `${RES_TXT[r].charAt(0)}${RES_TXT[r].slice(1).toLowerCase()} do ${profile.myTeam}` : ''],
+    ['Pênaltis', hasPens(m) ? `${+m.ph} a ${+m.pa}, ${winnerSide(m) === 'h' ? m.home : m.away} se classificou` : ''],
+    ['Seu time', r ? `${RES_LONG[r]} (${profile.myTeam})` : ''],
     ['Público', +m.att ? fmtN(m.att) + ' pessoas' : ''],
     ['Com quem', m.with],
     ['Nota', m.rating ? '★'.repeat(m.rating) + '☆'.repeat(5 - m.rating) : '']
@@ -1304,15 +1627,16 @@ function renderLogos(){
   if (state.profile.myTeam){ const k = clubKey(state.profile.myTeam); if (!counts.has(k)) counts.set(k, { name: state.profile.myTeam, n: 0 }); }
   let list = [...counts.entries()].sort((a, b) => b[1].n - a[1].n || a[1].name.localeCompare(b[1].name));
   if (logosFocus) list = [...list.filter(([k]) => logosFocus.has(k)), ...list.filter(([k]) => !logosFocus.has(k))];
-  const status = rec => !rec ? (logoApiDown ? 'Busca automática indisponível' : 'Procurando…') : rec.source === 'manual' ? 'Escudo seu' : rec.source === 'auto' ? 'Encontrado automaticamente' : 'Sem escudo, usando a sigla';
+  const hasImg = rec => !!(rec && (rec.url || rec.path));
+  const status = rec => !rec || (needsLookup(rec) && !hasImg(rec)) ? (logoApiDown ? 'Busca automática indisponível' : 'Procurando…') : rec.source === 'manual' ? (hasImg(rec) ? 'Escudo escolhido por você' : 'Sigla escolhida por você') : rec.source === 'auto' ? 'Encontrado automaticamente' : 'Não encontrado, usando a sigla';
   let h = `<p class="hint">Os escudos são buscados sozinhos no TheSportsDB. Se algum vier errado ou não aparecer, envie uma imagem, cole o link de uma imagem ou volte para a sigla.</p>`;
   if (!list.length) h += `<p class="hint">Registre um jogo para os clubes aparecerem aqui.</p>`;
   h += `<div class="lg-list">${list.map(([k, v]) => { const rec = state.logos[k]; return `<div class="lg" data-key="${esc(k)}" data-name="${esc(v.name)}">
-    <div class="lg-top">${mono(v.name)}<div><h3>${esc(v.name)}${rec && rec.source !== 'none' ? '<span class="pill ok">ESCUDO</span>' : ''}</h3><p>${status(rec)}${v.n ? ` · ${v.n} ${v.n === 1 ? 'jogo' : 'jogos'}` : ''}</p></div></div>
+    <div class="lg-top">${mono(v.name)}<div><h3>${esc(v.name)}${hasImg(rec) ? '<span class="pill ok">ESCUDO</span>' : ''}</h3><p>${status(rec)}${v.n ? ` · ${v.n} ${v.n === 1 ? 'jogo' : 'jogos'}` : ''}</p></div></div>
     <div class="lg-actions">
       <label class="btn ghost sm">Enviar imagem<input type="file" accept="image/*" data-lg-file aria-label="Enviar escudo de ${esc(v.name)}"></label>
       <button class="btn line sm" type="button" data-lg-auto>Buscar de novo</button>
-      ${rec && rec.source !== 'none' ? '<button class="btn line sm" type="button" data-lg-none>Usar sigla</button>' : ''}
+      ${hasImg(rec) ? '<button class="btn line sm" type="button" data-lg-none>Usar sigla</button>' : ''}
     </div>
     <form class="lg-url" data-lg-url><input type="url" inputmode="url" placeholder="ou cole o link de uma imagem" aria-label="Link do escudo de ${esc(v.name)}"><button class="btn ghost sm" type="submit">Usar</button></form>
   </div>`; }).join('')}</div>`;
@@ -1344,7 +1668,7 @@ $('#lg-body').addEventListener('submit', async e => {
 $('#lg-body').addEventListener('click', async e => {
   const box = e.target.closest('.lg'); if (!box) return;
   const key = box.dataset.key, name = box.dataset.name;
-  if (e.target.closest('[data-lg-none]')){ if (await setLogo(key, { name, source: 'none' })) toast('Usando a sigla'); return; }
+  if (e.target.closest('[data-lg-none]')){ if (await setLogo(key, { name, source: 'manual' })) toast('Usando a sigla'); return; }
   const au = e.target.closest('[data-lg-auto]');
   if (au){
     au.disabled = true; au.textContent = 'Buscando…';
@@ -1394,10 +1718,10 @@ function openConfig(){ $('#sh-config').showModal(); }
 $('#c-demo').addEventListener('click', () => { state.demo = !state.demo; $('#sh-config').close(); render(); setTab('jogos'); if (state.demo) queueLogos(); });
 $('#c-logos').addEventListener('click', () => openLogos());
 $('#c-logout').addEventListener('click', async () => { $('#sh-config').close(); try { await sb.auth.signOut(); } catch (e) {} resetApp(); showLogin(); toast('Você saiu da conta'); });
-const COLS = ['numero','data','mandante','gols_mandante','gols_visitante','visitante','competicao','estadio','cidade','pais','publico','nota','com_quem','lembrancas'];
+const COLS = ['numero','data','mandante','gols_mandante','gols_visitante','visitante','competicao','estadio','cidade','pais','publico','nota','com_quem','lembrancas','penaltis_mandante','penaltis_visitante'];
 const csvCell = v => { const s = String(v ?? ''); return /[",;\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
 const fmtBR = s => { const [y, m, d] = String(s || '').split('-'); return d ? `${d}/${m}/${y}` : ''; };
-const toCSV = list => '﻿' + COLS.join(';') + '\n' + sortAsc(list).map((m, i) => [i + 1, fmtBR(m.date), m.home, m.hg, m.ag, m.away, m.comp, m.stadium, m.city, m.country, m.att || '', m.rating || '', m.with, m.notes].map(csvCell).join(';')).join('\n') + '\n';
+const toCSV = list => '﻿' + COLS.join(';') + '\n' + sortAsc(list).map((m, i) => [i + 1, fmtBR(m.date), m.home, m.hg, m.ag, m.away, m.comp, m.stadium, m.city, m.country, m.att || '', m.rating || '', m.with, m.notes, hasPens(m) ? m.ph : '', hasPens(m) ? m.pa : ''].map(csvCell).join(';')).join('\n') + '\n';
 function offerFile(filename, text, mime){
   const url = URL.createObjectURL(new Blob([text], { type: mime }));
   const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
@@ -1412,7 +1736,7 @@ $('#c-exp-json').addEventListener('click', () => {
   offerFile(`caderneta-backup-${todayISO()}.json`, JSON.stringify(payload, null, 2), 'application/json');
 });
 $('#c-tpl').addEventListener('click', () => {
-  const tpl = '﻿' + COLS.slice(1).join(';') + '\n' + ['12/10/2019','São Bernardo FC',2,1,'Santo André','Paulistão A2','Estádio 1º de Maio','São Bernardo do Campo','Brasil','','4','Pai','Exemplo: apague esta linha'].map(csvCell).join(';') + '\n';
+  const tpl = '﻿' + COLS.slice(1).join(';') + '\n' + ['12/10/2019','São Bernardo FC',2,1,'Santo André','Paulistão A2','Estádio 1º de Maio','São Bernardo do Campo','Brasil','','4','Pai','Exemplo: apague esta linha','',''].map(csvCell).join(';') + '\n';
   offerFile('modelo-caderneta.csv', tpl, 'text/csv');
 });
 function parseCSV(text){
@@ -1441,14 +1765,14 @@ function parseDateAny(s){
 function rowsToMatches(rows){
   const head = rows[0].map(h => norm(h).replace(/ /g, '_'));
   const idx = k => head.findIndex(h => h === k || h.startsWith(k));
-  const I = { data: idx('data'), home: idx('mandante'), hg: idx('gols_mandante'), ag: idx('gols_visitante'), away: idx('visitante'), comp: idx('competicao'), stadium: idx('estadio'), city: idx('cidade'), country: idx('pais'), att: idx('publico'), rating: idx('nota'), with: idx('com_quem'), notes: idx('lembrancas') };
+  const I = { data: idx('data'), home: idx('mandante'), hg: idx('gols_mandante'), ag: idx('gols_visitante'), away: idx('visitante'), comp: idx('competicao'), stadium: idx('estadio'), city: idx('cidade'), country: idx('pais'), att: idx('publico'), rating: idx('nota'), with: idx('com_quem'), notes: idx('lembrancas'), ph: idx('penaltis_m'), pa: idx('penaltis_v') };
   if (I.data < 0 || I.home < 0 || I.away < 0) throw new Error('A planilha precisa das colunas data, mandante e visitante.');
   const out = [], bad = [];
   rows.slice(1).forEach((r, i) => {
     const g = k => I[k] >= 0 ? String(r[I[k]] ?? '').trim() : '';
     const date = parseDateAny(g('data'));
     if (!date || !g('home') || !g('away')){ bad.push(i + 2); return; }
-    out.push({ date, home: g('home'), away: g('away'), hg: parseInt(g('hg')) || 0, ag: parseInt(g('ag')) || 0, comp: g('comp'), stadium: g('stadium'), city: g('city'), country: g('country') || 'Brasil', att: parseInt(g('att').replace(/\D/g, '')) || 0, rating: Math.max(0, Math.min(5, parseInt(g('rating')) || 0)), with: g('with'), notes: g('notes') });
+    out.push({ date, home: g('home'), away: g('away'), hg: parseInt(g('hg')) || 0, ag: parseInt(g('ag')) || 0, comp: g('comp'), stadium: g('stadium'), city: g('city'), country: g('country') || 'Brasil', att: parseInt(g('att').replace(/\D/g, '')) || 0, rating: Math.max(0, Math.min(5, parseInt(g('rating')) || 0)), with: g('with'), notes: g('notes'), ph: g('ph') === '' ? null : parseInt(g('ph')), pa: g('pa') === '' ? null : parseInt(g('pa')) });
   });
   return { out, bad };
 }
