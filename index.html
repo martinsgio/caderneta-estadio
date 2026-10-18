@@ -307,7 +307,8 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
 .grip{outline:none;width:42px;height:4px;border-radius:2px;background:var(--surface-3);margin:9px auto 0;flex:none}
 .sh-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px var(--gut);flex:none}
 .sh-head h2{font-family:var(--f-display);font-weight:900;font-size:34px;text-transform:uppercase;line-height:1}
-.sh-body{overflow-y:auto;padding:4px var(--gut) calc(24px + var(--sab));display:grid;gap:16px}
+.sh-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px var(--gut) calc(24px + var(--sab));display:grid;gap:16px;grid-auto-rows:max-content;align-content:start;min-height:0}
+.sh-body>*{min-height:max-content}
 
 .field{display:grid;gap:7px;min-width:0}
 .field>span{font-size:13px;font-weight:600;color:var(--muted)}
@@ -339,14 +340,26 @@ dialog.sheet::backdrop{background:rgba(2,4,10,.7);backdrop-filter:blur(3px)}
 
 /* detalhe */
 .dt-hero{border-radius:26px;overflow:hidden}
-.dt-hero .cover{min-height:250px;padding:16px 16px 22px}
-.dt-hero .score{font-size:76px}
+.dt-hero .cover{min-height:236px;padding:16px 14px 20px}
+.dt-hero .score{font-size:68px}
 .kv{display:grid;background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin:0}
 .kv div{display:grid;grid-template-columns:104px minmax(0,1fr);gap:10px;padding:12px 16px;border-top:1px solid var(--line);font-size:14px}
 .kv div:first-child{border-top:0}
 .kv dt{color:var(--muted);font-size:13px}
 .kv dd{margin:0;overflow-wrap:anywhere}
-.note{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:14px 16px;white-space:pre-wrap;overflow-wrap:anywhere}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:14px 16px;white-space:pre-wrap;overflow-wrap:anywhere;display:grid;gap:6px;font-size:15px;line-height:1.5}
+.note .k,.tile .k{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:normal}
+.dsum{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.dsum .res{font-size:11px;padding:6px 11px}
+.dsum .stars{color:var(--gold);font-size:20px;letter-spacing:2px;line-height:1}
+.dsum .stars i{font-style:normal;color:var(--surface-3)}
+.dsum .pill2{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;font-weight:600;padding:6px 11px;border-radius:999px;background:var(--surface-2);color:var(--ink)}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 14px;display:grid;gap:4px;align-content:start;min-width:0}
+.tile.wide{grid-column:1/-1}
+.tile b{font-size:15.5px;font-weight:600;line-height:1.3;overflow-wrap:anywhere}
+.tile small{color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
+.tile .big{font-family:var(--f-display);font-weight:900;font-size:26px;line-height:1}
 .confirm{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.5);border-radius:22px;padding:14px;display:grid;gap:10px}
 .confirm p{margin:0;font-weight:600}
 
@@ -1577,21 +1590,27 @@ function openDetail(id){
   const visit = sameSt.findIndex(x => x.id === m.id) + 1;
   const r = resultFor(m, profile.myTeam);
   $('#det-title').textContent = `Ingresso nº ${String(seq).padStart(3, '0')}`;
-  const rows = [
-    ['Data', fmtLong(m.date)],
-    ['Estádio', [m.stadium, isTemplo(m.stadium) ? '(templo histórico)' : ''].filter(Boolean).join(' ')],
-    ['Local', [m.city, m.country].filter(Boolean).join(', ')],
-    ['Visita', m.stadium && visit ? `${visit}ª vez neste estádio` : ''],
-    ['Pênaltis', hasPens(m) ? `${+m.ph} a ${+m.pa}, ${winnerSide(m) === 'h' ? m.home : m.away} se classificou` : ''],
-    ['Seu time', r ? `${RES_LONG[r]} (${profile.myTeam})` : ''],
-    ['Público', +m.att ? fmtN(m.att) + ' pessoas' : ''],
-    ['Com quem', m.with],
-    ['Nota', m.rating ? '★'.repeat(m.rating) + '☆'.repeat(5 - m.rating) : '']
-  ].filter(x => x[1]);
+  const d = parseD(m.date);
+  const shortDate = `${String(d.getDate()).padStart(2, '0')} ${MESES[d.getMonth()]} ${d.getFullYear()}`;
+  const stars = m.rating ? `<span class="stars" aria-label="Nota ${m.rating} de 5">${'★'.repeat(m.rating)}<i>${'★'.repeat(5 - m.rating)}</i></span>` : '';
+  const sum = [
+    r ? `<span class="res ${r}">${esc(RES_LONG[r].toUpperCase())}</span>` : '',
+    stars
+  ].filter(Boolean).join('');
+  const tile = (k, v, sub = '', cls = '') => v ? `<div class="tile ${cls}"><span class="k">${k}</span><b>${esc(v)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</div>` : '';
+  const tiles = [
+    tile('Com quem', m.with, '', 'wide'),
+    tile('Estádio', m.stadium || 'Não informado', [m.city, m.country && norm(m.country) !== 'brasil' ? m.country : ''].filter(Boolean).join(', ') + (isTemplo(m.stadium) ? ' · templo histórico' : ''), 'wide'),
+    tile('Data', shortDate, DIAS[d.getDay()]),
+    m.stadium && visit ? tile('Visita', `${visit}ª vez`, 'neste estádio') : '',
+    +m.att ? tile('Público', fmtN(m.att), 'pessoas') : '',
+    tile('Competição', m.comp)
+  ].filter(Boolean).join('');
   $('#det-body').innerHTML = `
     <div class="dt-hero"><div class="cover" data-cover="${esc(m.id)}">${coverInner(m, null, true)}</div></div>
-    <dl class="kv">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-    ${m.notes ? `<div class="note">${esc(m.notes)}</div>` : ''}
+    ${sum ? `<div class="dsum">${sum}</div>` : ''}
+    ${m.notes ? `<div class="note"><span class="k">Lembranças</span>${esc(m.notes)}</div>` : ''}
+    <div class="tiles">${tiles}</div>
     ${state.demo ? '' : `<div class="btn-row" id="det-actions"><button class="btn primary" style="flex:1" data-edit="${esc(m.id)}">Editar ingresso</button><button class="btn ghost" data-del="${esc(m.id)}">Excluir</button></div>
     <button class="link" style="justify-self:start" data-logos-for="${esc(m.id)}">Escudo errado? Ajustar escudos</button>`}`;
   $('#sh-detail').showModal();
